@@ -1,0 +1,170 @@
+import React, { useState } from "react";
+import { Form, Button, Image, ButtonGroup } from "react-bootstrap";
+import style from './signup.module.scss'
+import axios from "axios";
+import Link from "next/link";
+
+const SignUp = () => {
+
+    const [formData, setFormData] = useState({
+        name: '',
+        age: '',
+        gender: '',
+        phone: '',
+        email: '',
+        password: '',
+    });
+    const [userType, setUserType] = useState('student');
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        const { name, age, gender, phone, email, password } = formData;
+        // const apiEndpoint = isDoctorRegistration ? 'doctor/register' : 'patient/register';
+        const payload = { name, age, gender, phone, email, password };
+        try {
+            console.log(userType);
+            const response = await axios.post(`http://localhost:4023/api/v1/${userType}/register`, payload);
+            console.log(response.data); // do something with the response if needed
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    return (
+        <div
+            className={style.signup}
+            style={{
+                backgroundImage: `url(${'/image/bg.jpg'})`,
+                height: "100vh",
+                backgroundSize: "cover",
+            }}
+        >
+            <div className="container">
+                <Form onSubmit={handleFormSubmit} className={style.form}>
+                    <div className={style.formGroup}>
+                        <div className="btnGroup float-end">
+                            <ButtonGroup aria-label="User Type">
+                                <Button variant={userType === 'student' ? 'primary' : 'outline-primary'} active={userType === 'student'} onClick={() => setUserType('student')} >
+                                    Student
+                                </Button>
+                                <Button variant={userType === 'teacher' ? 'primary' : 'outline-primary'} active={userType === 'teacher'} onClick={() => setUserType('teacher')}>
+                                    Teacher
+                                </Button>
+                            </ButtonGroup>
+                        </div>
+                        <div>
+                            <div className={style.student}>
+                                <Image className={style.studentLogo} src='/image/patient-logo.png' />
+                                {userType === 'teacher' && <h1>Teacher Sign Up</h1>}
+                                {userType === 'student' && <h1>Student Sign Up</h1>}
+                            </div>
+                            <Form.Group controlId="formBasicName" className="mb-1" md="6" lg="4">
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control
+                                    style={{ width: '90%' }}
+                                    type="text"
+                                    placeholder="Enter name"
+                                    name="name" className="form-control" required
+                                    value={formData.name}
+                                    onChange={handleInputChange}
+                                />
+                            </Form.Group>
+
+                            <Form.Group controlId="formBasicEmail" className="mb-1" md="6" lg="4">
+                                <Form.Label>Email address</Form.Label>
+                                <Form.Control
+                                    style={{ width: '90%' }}
+                                    type="email"
+                                    placeholder="Enter email"
+                                    name="email" className="form-control" required
+                                    value={formData.email}
+                                    onChange={handleInputChange}
+                                />
+
+                            </Form.Group>
+
+                            <div className='d-flex middle'>
+                                <Form.Group controlId="formBasicName" className="mb-1" md="6" lg="4">
+                                    <div className="d-flex">
+                                        <Form.Label>Age</Form.Label>
+                                        <Form.Control
+                                            className='ageInput form-control'
+                                            style={{ width: '100px' }}
+                                            type="number"
+                                            placeholder="Age"
+                                            name="age" required
+                                            value={formData.age}
+                                            onChange={handleInputChange}
+                                        />
+                                        <label htmlFor="gender" className="ms-3" >Gender</label>
+                                        <select name="gender" className="form-control ms-2" required
+                                            value={formData.gender}
+                                            onChange={handleInputChange} style={{ width: '100px' }}>
+                                            <option value="">Select</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                </Form.Group>
+                            </div>
+
+
+                            <Form.Group controlId="formBasicName" className="mb-1" md="6" lg="4">
+                                <Form.Label>Number</Form.Label>
+                                <Form.Control
+                                    style={{ width: '90%' }}
+                                    type="number"
+                                    placeholder="Enter Number"
+                                    name="phone" className="form-control" required
+                                    value={formData.phone}
+                                    onChange={handleInputChange}
+                                />
+
+                            </Form.Group>
+
+                            <Form.Group
+                                controlId="formBasicPassword"
+                                className="mb-1"
+                                md="6"
+                                lg="4"
+                            >
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control
+                                    style={{ width: '90%' }}
+                                    type="password"
+                                    placeholder="Password"
+                                    name="password" className="form-control" required
+                                    value={formData.password}
+                                    onChange={handleInputChange}
+                                />
+                            </Form.Group>
+
+                            <div className="d-flex justify-content-center">
+                                {userType === 'teacher' && <Button variant="primary" type="submit">
+                                    Sign Up as Teacher
+                                </Button>}
+                                {userType === 'student' && <Button variant="primary" type="submit">
+                                    Sign Up as Student
+                                </Button>}
+                            </div>
+                            <hr />
+                            <div className="d-flex justify-content-center accountBtn">
+                                <Link href='/' >
+                                    <Button variant="success" type="submit">
+                                        Already Have an account?
+                                    </Button>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </Form>
+            </div>
+        </div>
+    );
+};
+
+export default SignUp;
