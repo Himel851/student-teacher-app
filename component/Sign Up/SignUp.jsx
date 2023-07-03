@@ -3,8 +3,13 @@ import { Form, Button, Image, ButtonGroup } from "react-bootstrap";
 import style from './signup.module.scss'
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
+
+    const [departmentOptions, setDepartmentOptions] = useState([]);
+    const router = useRouter();
 
     const [formData, setFormData] = useState({
         name: '',
@@ -13,6 +18,8 @@ const SignUp = () => {
         phone: '',
         email: '',
         password: '',
+        department: "",
+        regId: "",
     });
     const [userType, setUserType] = useState('student');
 
@@ -23,15 +30,25 @@ const SignUp = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        const { name, age, gender, phone, email, password } = formData;
-        // const apiEndpoint = isDoctorRegistration ? 'doctor/register' : 'patient/register';
-        const payload = { name, age, gender, phone, email, password };
+        const { name, age, gender, phone, email, password, department, regId } = formData;
+        let payload = { name, age, gender, phone, email, password };
+
+        // Extract department name from the department object
+        const departmentName = department.departmentName;
+
+        if (userType === "teacher") {
+            payload = { ...payload, department: departmentName, regId };
+        }
+        console.log(payload);
         try {
             console.log(userType);
-            const response = await axios.post(`http://localhost:4023/api/v1/${userType}/register`, payload);
+            const response = await axios.post(`http://localhost:4024/api/v1/${userType}/register`, payload);
             console.log(response.data); // do something with the response if needed
+            toast.success("Registration Successful");
+            router.push('/');
         } catch (error) {
             console.error(error);
+            toast.error("Registration Error");
         }
     };
     return (
@@ -62,34 +79,38 @@ const SignUp = () => {
                                 {userType === 'teacher' && <h1>Teacher Sign Up</h1>}
                                 {userType === 'student' && <h1>Student Sign Up</h1>}
                             </div>
-                            <Form.Group controlId="formBasicName" className="mb-1" md="6" lg="4">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control
-                                    style={{ width: '90%' }}
-                                    type="text"
-                                    placeholder="Enter name"
-                                    name="name" className="form-control" required
-                                    value={formData.name}
-                                    onChange={handleInputChange}
-                                />
-                            </Form.Group>
 
-                            <Form.Group controlId="formBasicEmail" className="mb-1" md="6" lg="4">
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control
-                                    style={{ width: '90%' }}
-                                    type="email"
-                                    placeholder="Enter email"
-                                    name="email" className="form-control" required
-                                    value={formData.email}
-                                    onChange={handleInputChange}
-                                />
-
-                            </Form.Group>
-
-                            <div className='d-flex middle'>
+                            <div className="d-flex gap-2">
                                 <Form.Group controlId="formBasicName" className="mb-1" md="6" lg="4">
-                                    <div className="d-flex">
+                                    <Form.Label>Name</Form.Label>
+                                    <Form.Control
+                                        style={{ width: '90%' }}
+                                        type="text"
+                                        placeholder="Enter name"
+                                        name="name" className="form-control" required
+                                        value={formData.name}
+                                        onChange={handleInputChange}
+                                    />
+                                </Form.Group>
+
+                                <Form.Group controlId="formBasicEmail" className="mb-1" md="6" lg="4">
+                                    <Form.Label>Email address</Form.Label>
+                                    <Form.Control
+                                        style={{ width: '90%' }}
+                                        type="email"
+                                        placeholder="Enter email"
+                                        name="email" className="form-control" required
+                                        value={formData.email}
+                                        onChange={handleInputChange}
+                                    />
+
+                                </Form.Group>
+                            </div>
+
+
+                            <div className='d-flex middle mt-3'>
+                                <Form.Group controlId="formBasicName" className="mb-1" md="6" lg="4">
+                                    <div className="d-flex gap-3">
                                         <Form.Label>Age</Form.Label>
                                         <Form.Control
                                             className='ageInput form-control'

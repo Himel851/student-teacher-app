@@ -7,6 +7,7 @@ import style from './login.module.scss'
 import { useRouter } from "next/router";
 import { useAuth } from "../../context/auth";
 import Header from "../navbar/Header";
+import { toast } from "react-toastify";
 
 
 
@@ -22,34 +23,25 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`http://localhost:4023/api/v1/${userType}/signin`, {
+            const response = await axios.post(`http://localhost:4024/api/v1/${userType}/signin`, {
                 email,
                 password,
             });
             const data = response.data;
-            // if (data.success) {
-            //     localStorage.setItem('auth', JSON.stringify(response.data.data));
-            //     setToken(data.data.token);
-            //     console.log(token);
-            // }
+            toast.success("Login Successful");
             if (data.success) {
-                localStorage.setItem('auth', JSON.stringify(response.data.data.token));
+                localStorage.setItem('auth', JSON.stringify(response.data.data));
                 setAuth(data.data); // Update the authentication state using setAuth
-                router.replace(`/${userType}`);
             }
         } catch (error) {
             console.error(error);
         }
     };
 
-    if (token) {
-        router.replace(`/${userType}`);
-    }
-    console.log(token)
+   
 
     return (
         <div>
-            {router.pathname !== '/' && <Header />}
 
             <div
                 className={style.studentLogin}
