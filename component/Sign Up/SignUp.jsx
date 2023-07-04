@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Form, Button, Image, ButtonGroup } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Form, Button, Image, ButtonGroup, Dropdown } from "react-bootstrap";
 import style from './signup.module.scss'
 import axios from "axios";
 import Link from "next/link";
@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 
 const SignUp = () => {
-
     const [departmentOptions, setDepartmentOptions] = useState([]);
     const router = useRouter();
 
@@ -19,7 +18,7 @@ const SignUp = () => {
         email: '',
         password: '',
         department: "",
-        regId: "",
+        teacherId: "",
     });
     const [userType, setUserType] = useState('student');
 
@@ -30,14 +29,14 @@ const SignUp = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        const { name, age, gender, phone, email, password, department, regId } = formData;
+        const { name, age, gender, phone, email, password, department, teacherId } = formData;
         let payload = { name, age, gender, phone, email, password };
 
         // Extract department name from the department object
         const departmentName = department.departmentName;
 
         if (userType === "teacher") {
-            payload = { ...payload, department: departmentName, regId };
+            payload = { ...payload, department: departmentName, teacherId };
         }
         console.log(payload);
         try {
@@ -51,6 +50,30 @@ const SignUp = () => {
             toast.error("Registration Error");
         }
     };
+    useEffect(() => {
+        const fetchDepartmentOptions = async () => {
+            try {
+                const response = await axios.get(
+                    "http://localhost:4024/api/v1/department/view"
+                );
+                setDepartmentOptions(response.data.data);
+                console.log(response.data.data)
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchDepartmentOptions();
+    }, []);
+
+    const handleDepartmentSelection = (department) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            department: department,
+        }));
+    };
+
+
     return (
         <div
             className={style.signup}
@@ -133,6 +156,64 @@ const SignUp = () => {
                                 </Form.Group>
                             </div>
 
+                            {userType === "teacher" && <>
+                                <Form.Group controlId="formBasicEmail" className="mb-1" md="6" lg="4">
+                                    <Form.Label>NID</Form.Label>
+                                    <Form.Control
+                                        style={{ width: '90%' }}
+                                        type="number"
+                                        placeholder="Enter nid"
+                                        name="teacherId" className="form-control" required
+                                        value={formData.teacherId}
+                                        onChange={handleInputChange}
+                                    />
+
+                                </Form.Group>
+
+                                <Form.Group controlId="formBasicDepartment" className="mb-1" md="6" lg="4">
+                                    <div className="d-flex gap-3 mt-3">
+                                        <Form.Label>Department</Form.Label>
+                                        <Dropdown>
+                                            <Dropdown.Toggle variant="primary" id="department-dropdown">
+                                                {formData.department ? formData.department.departmentName : "Select Department"}
+                                            </Dropdown.Toggle>
+                                            <Dropdown.Menu>
+                                                {departmentOptions?.map((department) => (
+                                                    <Dropdown.Item
+                                                        key={department._id}
+                                                        onClick={() => handleDepartmentSelection(department)}
+                                                    >
+                                                        {department.departmentName}
+                                                    </Dropdown.Item>
+                                                ))}
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                    </div>
+                                </Form.Group></>}
+                            {/* 
+
+                            {userType === "doctor" && (
+                                <Form.Group controlId="formBasicDepartment" className="mb-1" md="6" lg="4">
+
+                                    <Form.Label>Department</Form.Label>
+                                    <Form.Control
+                                        style={{ width: "90%" }}
+                                        as="select"
+                                        name="department"
+                                        className="form-control"
+                                        required
+                                        value={formData.department}
+                                        onChange={handleInputChange}
+                                    >
+                                        <option value="">Select Department</option>
+                                        {departmentOptions?.departmentName?.map((department) => (
+                                            <option key={department._id} value={department._id}>
+                                                {department.name}
+                                            </option>
+                                        ))}
+                                    </Form.Control>
+                                </Form.Group>
+                            )} */}
 
                             <Form.Group controlId="formBasicName" className="mb-1" md="6" lg="4">
                                 <Form.Label>Number</Form.Label>
