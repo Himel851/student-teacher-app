@@ -32,6 +32,7 @@ const Login = () => {
             if (data.success) {
                 localStorage.setItem('auth', JSON.stringify(response.data.data));
                 setAuth(data.data); // Update the authentication state using setAuth
+                { userType === 'admin' && router.replace(`/dashboard`) };
             }
         } catch (error) {
             console.error(error);

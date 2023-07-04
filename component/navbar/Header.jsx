@@ -22,7 +22,7 @@ const Header = () => {
 
     return (
         <div>
-             
+
             <Navbar bg="light" expand="lg" fixed="top" >
                 <Container >
                     <Navbar.Brand>
@@ -41,11 +41,27 @@ const Header = () => {
                             style={{ maxHeight: 'auto' }}
                             navbarScroll
                         >
-                            <Link href="/dashboard" className="text-dark nav-link arrow-none fw-bold" >Dashboard</Link>
-                            <Link href="/teacher-list" className="text-dark nav-link arrow-none fw-bold" >Teacher's List</Link>
-                            <Link href="/student-list" className="text-dark nav-link arrow-none fw-bold" >Student's List</Link>
-                            <Link href="/create-appointment" className="text-dark nav-link arrow-none fw-bold" >Create Appointment</Link>
-                            <Link href="/appointment-list" className="text-dark nav-link arrow-none fw-bold" >Appointment List</Link>
+                            {
+                                auth?.role === 'admin' && <>
+                                    <Link href="/dashboard" className="text-dark nav-link arrow-none fw-bold" >Dashboard</Link>
+                                    <Link href="/teacher-list" className="text-dark nav-link arrow-none fw-bold" >Teacher's List</Link>
+                                    <Link href="/student-list" className="text-dark nav-link arrow-none fw-bold" >Student's List</Link>
+                                    <Link href="/pending-doctor" className="text-dark nav-link arrow-none fw-bold" >Pending List</Link>
+                                    <Link href="/approve-doctor" className="text-dark nav-link arrow-none fw-bold" >Approved List</Link>
+                                    <Link href="/rejected-doctor" className="text-dark nav-link arrow-none fw-bold" >Rejected List</Link>
+                                </>
+                            }
+                            {
+                                auth?.role === 'student' && <>
+                                    <Link href="/create-appointment" className="text-dark nav-link arrow-none fw-bold" >Create Appointment</Link>
+                                </>
+                            }
+                            {
+                                auth?.role === 'teacher' && <>
+                                    <Link href="/appointment-list" className="text-dark nav-link arrow-none fw-bold" >Appointment List</Link>
+
+                                </>
+                            }
                             {/* <Link href="/patient-profile" className="text-dark nav-link arrow-none fw-bold" >Profile</Link> */}
                         </Nav>
                         <div className="d-flex">
