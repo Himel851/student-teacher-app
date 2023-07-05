@@ -53,7 +53,7 @@ const Header = () => {
                             }
                             {
                                 auth?.role === 'student' && <>
-                                    <Link href="/create-appointment" className="text-dark nav-link arrow-none fw-bold" >Create Appointment</Link>
+                                    <Link href="/teacher-list" className="text-dark nav-link arrow-none fw-bold" >Teacher List</Link>
                                 </>
                             }
                             {

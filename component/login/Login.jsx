@@ -33,6 +33,7 @@ const Login = () => {
                 localStorage.setItem('auth', JSON.stringify(response.data.data));
                 setAuth(data.data); // Update the authentication state using setAuth
                 { userType === 'admin' && router.replace(`/dashboard`) };
+                { userType === 'student' && router.replace(`/teacher-list`) };
             }
         } catch (error) {
             console.error(error);
