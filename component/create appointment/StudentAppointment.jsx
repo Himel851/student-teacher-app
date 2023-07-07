@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 
@@ -8,9 +9,31 @@ const StudentAppointment = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [appointmentDate, setAppointmentDate] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    
+    try {
+      const response = await axios.post('http://localhost:4023/api/v1/appointment/create', {
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        appointmentDate
+      });
+      
+      // Handle response if needed
+      console.log(response.data);
+      
+      // Reset form fields
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setPhoneNumber('');
+      setAppointmentDate('');
+    } catch (error) {
+      // Handle error
+      console.error(error);
+    }
   };
 
   return (
