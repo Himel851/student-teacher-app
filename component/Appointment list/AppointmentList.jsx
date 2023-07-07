@@ -2,11 +2,12 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Container, Table } from "react-bootstrap";
+import { Button, Container, Table } from "react-bootstrap";
 import { Check, X } from "react-bootstrap-icons";
+import { toast } from "react-toastify";
 
 export default function AppointmentList() {
-  const [list, setList] = useState({});
+  const [list, setList] = useState([]);
   const router = useRouter();
   const { id } = router?.query;
   console.log(id)
@@ -23,68 +24,62 @@ export default function AppointmentList() {
         });
     }
   }, [id]);
+
+  const handleApprove = async (teacherId) => {
+    try {
+      const response = await axios.get(`http://localhost:4024/api/v1/appointment/approve/${teacherId}`);
+      toast.success('Appointment approve successful......');
+    } catch (error) {
+      console.error('Error approving doctor:', error);
+      toast.error('Appointment approve failed......');
+    }
+  };
+
+  const handleReject = async (teacherId) => {
+    try {
+      const response = await axios.get(`http://localhost:4024/api/v1/appointment/reject/${teacherId}`);
+      toast.success('Appointment Rejected successful......');
+    } catch (error) {
+      console.error('Error rejecting doctor:', error);
+      toast.error('Appointment rejected failed......');
+    }
+  };
+
+
   return (
     <Container className="py-5" style={{ marginTop: '4rem' }}>
       <Table responsive striped bordered hover>
         <thead>
           <tr>
+            <th>No</th>
+
             <th>
-              <strong>Student Name</strong>
+              <strong>Slot</strong>
             </th>
             <th>
-              <strong>Approve</strong>
+              <strong>Reason</strong>
             </th>
             <th>
-              <strong>Not Approve</strong>
+              <strong>Actions</strong>
             </th>
+
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Domain customization</td>
-            <td>
-              <Check className="text-success" />
-            </td>
-            <td>
-              <X className="text-danger" />
-            </td>
-          </tr>
-          <tr>
-            <td>FTP</td>
-            <td>
-              <Check className="text-success" />
-            </td>
-            <td>
-              <Check className="text-success" />
-            </td>
-          </tr>
-          <tr>
-            <td>Database</td>
-            <td>
-              <Check className="text-success" />
-            </td>
-            <td>
-              <X className="text-danger" />
-            </td>
-          </tr>
-          <tr>
-            <td>Support</td>
-            <td>
-              <Check className="text-success" />
-            </td>
-            <td>
-              <Check className="text-success" />
-            </td>
-          </tr>
-          <tr>
-            <td>Backups</td>
-            <td>
-              <Check className="text-success" />
-            </td>
-            <td>
-              <X className="text-danger" />
-            </td>
-          </tr>
+          {list?.map((data, index) => (
+            <tr key={data._id}>
+              <td>{index + 1}</td>
+              <td>{data?.reason}</td>
+              <td>{data?.slot}</td>
+
+              <td>
+                <div className='d-flex gap-2'>
+                  <Button variant="success" onClick={() => handleApprove(data._id)}>Approve</Button>
+                  <Button variant="danger" onClick={() => handleReject(data._id)}>Reject</Button>
+                </div>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </Container>
