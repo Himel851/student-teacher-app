@@ -1,8 +1,28 @@
-import React from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import { Container, Table } from "react-bootstrap";
 import { Check, X } from "react-bootstrap-icons";
 
 export default function AppointmentList() {
+  const [list, setList] = useState({});
+  const router = useRouter();
+  const { id } = router?.query;
+  console.log(id)
+  useEffect(() => {
+    if (id) {
+      // Fetch the doctor's details based on the doctorId
+      axios.get(`http://localhost:4024/api/v1/appointment/view/teacher/${id}`)
+        .then(response => {
+          setList(response.data?.data);
+          console.log(response.data?.data);
+        })
+        .catch(error => {
+          console.error('Error fetching doctor details:', error);
+        });
+    }
+  }, [id]);
   return (
     <Container className="py-5" style={{ marginTop: '4rem' }}>
       <Table responsive striped bordered hover>
