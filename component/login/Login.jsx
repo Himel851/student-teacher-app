@@ -28,7 +28,14 @@ const Login = () => {
                 password,
             });
             const data = response.data;
-            toast.success("Login Successful");
+            if (data?.data == null) {
+                toast.error("Your account is not approved yet!");
+                setEmail('');
+                setPassword('');
+            } else {
+                toast.success("Login Successful");
+            }
+            console.log(data)
             if (data.success) {
                 localStorage.setItem('auth', JSON.stringify(response.data.data));
                 setAuth(data.data); // Update the authentication state using setAuth
@@ -37,10 +44,11 @@ const Login = () => {
             }
         } catch (error) {
             console.error(error);
+            toast.error("Invalid password or email");
         }
     };
 
-   
+
 
     return (
         <div>

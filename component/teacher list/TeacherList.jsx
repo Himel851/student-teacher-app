@@ -75,19 +75,17 @@ const TeacherList = () => {
                                 <Card.Body>
                                     <Card.Title>{teacher.name}</Card.Title>
                                     <Card.Text>
-                                        <b>Speciality -</b> {teacher.speciality} <br />
-                                        <b>Degree-</b> {teacher.degree}
+                                        <b>Speciality -</b> lorem lorem <br />
+                                        <b>Degree-</b> MBBS
                                     </Card.Text>
                                     <div className='d-flex gap-3'>
-                                        <Link href={`/doctor-appointment/${teacher._id}`}>
+                                        <Link href={`/create-appointment/${teacher._id}`}>
                                             <Button variant="success">Get Appointment </Button>
                                         </Link>
-                                        {/* <Link href={`/doctor-profile/${doctor._id}`}>
-                      <Button variant="success">Profile</Button>
-                    </Link> */}
-                                        <div className='d-flex gap-3'>
+                                    
+                                        {/* <div className='d-flex gap-3'>
                                             <Button variant="success" onClick={() => handleProfileClick(teacher._id)}>Profile</Button>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </Card.Body>
                             </Card>
