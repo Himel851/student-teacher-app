@@ -73,10 +73,20 @@ export default function AppointmentList() {
               <td>{data?.reason}</td>
 
               <td>
-                <div className='d-flex gap-2'>
-                  <Button variant="success" onClick={() => handleApprove(data._id)}>Approve</Button>
-                  <Button variant="danger" onClick={() => handleReject(data._id)}>Reject</Button>
-                </div>
+                {
+                  data?.isApprovedByTeacher ? <>
+                    <h4>Approved</h4>
+                  </> : <>
+                    {data?.isRejectedByTeacher ? <>
+                      <h4>Rejected</h4>
+                    </> : <>
+                      <div className='d-flex gap-2'>
+                        <Button variant="success" onClick={() => handleApprove(data._id)}>Approve</Button>
+                        <Button variant="danger" onClick={() => handleReject(data._id)}>Reject</Button>
+                      </div></>}
+                  </>
+                }
+
               </td>
             </tr>
           ))}

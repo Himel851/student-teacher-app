@@ -44,6 +44,10 @@ const TeacherProfile = () => {
             <h3> {teacher?.name}</h3>
             <p><b>Phone -</b> {teacher?.phone} </p>
             <p><b>Email -</b> {teacher?.email} </p>
+            {auth?.role === 'student' && <>
+              <Link href={`/create-appointment/${teacher._id}`}>
+                <Button variant="success">Get Appointment </Button>
+              </Link></>}
 
             {auth?.role === 'teacher' && <div className='d-flex justify-content-center'>
               <Link href={`/edit-profile?id=${teacher?._id}`} as={`/edit-profile?id=${teacher?._id}`}>
@@ -58,12 +62,9 @@ const TeacherProfile = () => {
           <Col xl={8} md={6}  >
             <p><b>Gender -</b> {teacher?.gender} </p>
             <p><b>Age -</b> {teacher?.age} </p>
-            <p> <b>Address -</b> {teacher?.address} </p>
             <p><b>Department -</b> {teacher?.department}</p>
             <p> <b>Education -</b> {teacher?.education}</p>
             <p> <b>Experience  -</b> {teacher?.experience} </p>
-            <p> <b>Address -</b> {teacher?.address} </p>
-            <p> <b>Short Description -</b> {teacher?.shortDescription} </p>
 
           </Col>
         </Row>

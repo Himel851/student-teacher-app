@@ -25,19 +25,22 @@ const MyAppointment = () => {
 
         fetchInvoiceData();
     }, [router.query.id]);
+
+    console.log(list?.data?.teacherId)
+
+
+    
+
     return (
         <div style={{ marginTop: '4rem', padding: '30px' }}>
             <Table responsive striped bordered hover>
                 <thead>
                     <tr>
                         <th>
-                            <strong>Patient Name</strong>
+                            <strong>Teacher Name</strong>
                         </th>
                         <th>
-                            <strong>Gender</strong>
-                        </th>
-                        <th>
-                            <strong>Age</strong>
+                            <strong>Department</strong>
                         </th>
                         <th>
                             <strong>Slot</strong>
@@ -54,9 +57,8 @@ const MyAppointment = () => {
                     {
                         list?.data?.map((item) => (
                             <tr key={item?._id}>
-                                <td>{item?.patientName}</td>
-                                <td>{item?.patientGender}</td>
-                                <td>{item?.patientAge}</td>
+                                <td>{item?.teacherName}</td>
+                                <td>{item?.teacherDepartment}</td>
                                 <td>{item?.slot}</td>
                                 <td>{item?.reason}</td>
                                 <td>
@@ -65,7 +67,6 @@ const MyAppointment = () => {
                                     </> : <>
                                         {item?.isRejectedByDoctor ? <>
                                             <h3>Rejected</h3>
-
                                         </> : <>
                                             <h3>Pending</h3>
                                         </>}

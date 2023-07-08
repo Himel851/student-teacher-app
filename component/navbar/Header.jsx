@@ -61,7 +61,7 @@ const Header = () => {
                             }
                             {
                                 auth?.role === 'teacher' && <>
-                                    <Link href="/appointment-list" className="text-dark nav-link arrow-none fw-bold" >Appointment List</Link>
+                                    <Link href={`/appointment-list/${auth?._id}`} className="text-dark nav-link arrow-none fw-bold" >Appointment List</Link>
                                     <Link href={`/teacher-profile/${auth?._id}`} className="text-dark nav-link arrow-none fw-bold" >Profile</Link>
 
                                 </>
@@ -69,11 +69,11 @@ const Header = () => {
                             {/* <Link href="/patient-profile" className="text-dark nav-link arrow-none fw-bold" >Profile</Link> */}
                         </Nav>
                         <div className="d-flex">
-                            {/* <Link href="/dashboard">
-                                <Button variant="success" className="me-2">
-                                    Dashboard
-                                </Button>
-                            </Link> */}
+                        {
+                                auth?.role === 'student' && <>
+                                    <Link href="/my-profile" className="text-dark nav-link arrow-none fw-bold mx-3 mt-1" >My Profile</Link>
+                                </>
+                            }
                             <Button variant="danger" onClick={handleLogout}>Logout</Button>
 
                         </div>

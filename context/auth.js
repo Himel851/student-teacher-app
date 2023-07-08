@@ -7,6 +7,7 @@ const AuthProvider = ({ children }) => {
     email: "",
     token: "",
     role: "",
+    name: "",
     user_type: "",
     _id: "",
   });
@@ -19,6 +20,7 @@ const AuthProvider = ({ children }) => {
         email: parseData.email,
         token: parseData.token,
         role: parseData.role,
+        name: parseData.name,
         user_type: parseData.user_type,
         _id: parseData._id,
       });

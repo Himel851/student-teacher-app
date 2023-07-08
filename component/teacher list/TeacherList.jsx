@@ -3,8 +3,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { Button, Card, Col, Container, Dropdown, Row, Table } from 'react-bootstrap'
+import { useAuth } from '../../context/auth';
 
 const TeacherList = () => {
+    const [auth, setAuth] = useAuth();
     const [departments, setDepartments] = useState([]);
     const [selectedDepartment, setSelectedDepartment] = useState('Computer Science & Engineering');
     const [teachers, setTeachers] = useState([]);
@@ -71,7 +73,12 @@ const TeacherList = () => {
                     {teachers.length > 0 ? <> {teachers.map(teacher => (
                         <Col xl={3} md={6} sm={12} className='mt-3' key={teacher._id}>
                             <Card style={{ width: '18rem' }}>
-                                <Card.Img variant="top" src="/image/doctor1.jpg" />
+                                <Card.Img
+                                    variant="top"
+                                    src={teacher?.profileImage || "/image/no-photo.png"}
+                                    style={{ height: "35vh", width: "41vh" }}
+                                />
+
                                 <Card.Body>
                                     <Card.Title>{teacher.name}</Card.Title>
                                     <Card.Text>
@@ -79,10 +86,12 @@ const TeacherList = () => {
                                         <b>Degree-</b> MBBS
                                     </Card.Text>
                                     <div className='d-flex gap-3'>
-                                        <Link href={`/create-appointment/${teacher._id}`}>
-                                            <Button variant="success">Get Appointment </Button>
-                                        </Link>
-                                    
+                                        {auth?.role === 'student' && <>
+                                            <Link href={`/create-appointment/${teacher._id}`}>
+                                                <Button variant="success">Get Appointment </Button>
+                                            </Link></>}
+
+
                                         <div className='d-flex gap-3'>
                                             <Button variant="success" onClick={() => handleProfileClick(teacher._id)}>Profile</Button>
                                         </div>
