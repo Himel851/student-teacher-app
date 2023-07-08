@@ -35,16 +35,17 @@ const Login = () => {
                 router.replace('/')
             } else {
                 toast.success("Login Successful");
+                if (data.success) {
+                    localStorage.setItem('auth', JSON.stringify(response.data.data));
+                    setAuth(data.data); // Update the authentication state using setAuth
+                    { userType === 'admin' && router.replace(`/dashboard`) };
+                    { userType === 'student' && router.replace(`/teacher-list`) };
+                    // { userType === 'teacher' && router.replace(`/teacher-profile/${data?.data?._id}`) };
+                    { userType === 'teacher' && router.replace(`/appointment-list/${data?.data?._id}`) };
+                }
             }
-            console.log(data)
-            if (data.success) {
-                localStorage.setItem('auth', JSON.stringify(response.data.data));
-                setAuth(data.data); // Update the authentication state using setAuth
-                { userType === 'admin' && router.replace(`/dashboard`) };
-                { userType === 'student' && router.replace(`/teacher-list`) };
-                // { userType === 'teacher' && router.replace(`/teacher-profile/${data?.data?._id}`) };
-                { userType === 'teacher' && router.replace(`/appointment-list/${data?.data?._id}`) };
-            }
+
+
         } catch (error) {
             console.error(error);
             toast.error("Invalid password or email");

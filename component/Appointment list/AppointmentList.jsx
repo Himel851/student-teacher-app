@@ -69,8 +69,8 @@ export default function AppointmentList() {
           {list?.map((data, index) => (
             <tr key={data._id}>
               <td>{index + 1}</td>
-              <td>{data?.reason}</td>
               <td>{data?.slot}</td>
+              <td>{data?.reason}</td>
 
               <td>
                 <div className='d-flex gap-2'>

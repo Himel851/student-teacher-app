@@ -4,6 +4,7 @@ import { useAuth } from '../../context/auth';
 import { useRouter } from 'next/router';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import Image from 'next/image';
+import { toast } from 'react-toastify';
 
 
 
@@ -15,6 +16,7 @@ const Header = () => {
         localStorage.removeItem('auth'); // Remove the authentication data from local storage
         setAuth(null); // Reset the authentication state
         router.push('/');
+        toast.success("Logout Successful");
     }
     console.log(auth?.role)
 
