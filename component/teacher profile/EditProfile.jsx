@@ -212,7 +212,7 @@ const EditProfile = () => {
                 <Button variant="success" type="submit" className="mt-4">
                     Update Profile
                 </Button>
-                <Link href={`/doctor-profile/${id}`}>
+                <Link href={`/teacher-profile/${id}`}>
                     <Button variant="success" type="submit" className="mt-4 mx-3">
                         Back
                     </Button>
