@@ -8,7 +8,7 @@ const AuthProvider = ({ children }) => {
     token: "",
     role: "",
     user_type: "",
-    id: "",
+    _id: "",
   });
   useEffect(() => {
     const data = localStorage.getItem("auth");
@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
         token: parseData.token,
         role: parseData.role,
         user_type: parseData.user_type,
-        id: parseData.id,
+        _id: parseData._id,
       });
     }
   }, []);

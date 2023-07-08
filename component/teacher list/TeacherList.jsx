@@ -83,9 +83,9 @@ const TeacherList = () => {
                                             <Button variant="success">Get Appointment </Button>
                                         </Link>
                                     
-                                        {/* <div className='d-flex gap-3'>
+                                        <div className='d-flex gap-3'>
                                             <Button variant="success" onClick={() => handleProfileClick(teacher._id)}>Profile</Button>
-                                        </div> */}
+                                        </div>
                                     </div>
                                 </Card.Body>
                             </Card>

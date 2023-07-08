@@ -63,7 +63,6 @@ const TeacherProfile = () => {
             <p> <b>Education -</b> {teacher?.education}</p>
             <p> <b>Experience  -</b> {teacher?.experience} </p>
             <p> <b>Address -</b> {teacher?.address} </p>
-            <p> <b>Speciality -</b>{teacher?.specialty} </p>
             <p> <b>Short Description -</b> {teacher?.shortDescription} </p>
 
           </Col>

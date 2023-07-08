@@ -18,7 +18,7 @@ const Header = () => {
         router.push('/');
         toast.success("Logout Successful");
     }
-    console.log(auth?.role)
+    console.log(auth?._id)
 
 
 
@@ -47,7 +47,7 @@ const Header = () => {
                                 auth?.role === 'admin' && <>
                                     <Link href="/dashboard" className="text-dark nav-link arrow-none fw-bold" >Dashboard</Link>
                                     <Link href="/teacher-list" className="text-dark nav-link arrow-none fw-bold" >Teacher's List</Link>
-                                    <Link href="/student-list" className="text-dark nav-link arrow-none fw-bold" >Student's List</Link>
+                                    {/* <Link href="/student-list" className="text-dark nav-link arrow-none fw-bold" >Student's List</Link> */}
                                     <Link href="/pending-doctor" className="text-dark nav-link arrow-none fw-bold" >Pending List</Link>
                                     <Link href="/approve-doctor" className="text-dark nav-link arrow-none fw-bold" >Approved List</Link>
                                     <Link href="/rejected-doctor" className="text-dark nav-link arrow-none fw-bold" >Rejected List</Link>
@@ -56,11 +56,13 @@ const Header = () => {
                             {
                                 auth?.role === 'student' && <>
                                     <Link href="/teacher-list" className="text-dark nav-link arrow-none fw-bold" >Teacher List</Link>
+                                    <Link href={`/my-appointment/${auth?._id}`} className="text-dark nav-link arrow-none fw-bold" >My Appointment</Link>
                                 </>
                             }
                             {
                                 auth?.role === 'teacher' && <>
                                     <Link href="/appointment-list" className="text-dark nav-link arrow-none fw-bold" >Appointment List</Link>
+                                    <Link href={`/teacher-profile/${auth?._id}`} className="text-dark nav-link arrow-none fw-bold" >Profile</Link>
 
                                 </>
                             }

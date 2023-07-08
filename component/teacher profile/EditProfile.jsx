@@ -13,12 +13,12 @@ const EditProfile = () => {
         department: '',
         phone: '',
         profileImage: '',
-        specialty: [],
+        // specialty: [],
         education: '',
         experience: '',
-        address: '',
-        shortDescription: '',
-        city: '',
+        // address: '',
+        // shortDescription: '',
+        // city: '',
     });
     const [auth, setAuth] = useAuth();
     const [departments, setDepartments] = useState([]);
@@ -34,7 +34,7 @@ const EditProfile = () => {
 
     const fetchProfileData = async () => {
         try {
-            const response = await axios.get(`http://localhost:4024/api/v1/doctor/view-profile/${id}`);
+            const response = await axios.get(`http://localhost:4024/api/v1/teacher/view-profile/${id}`);
             const { _id, ...profileData } = response.data?.data; // Destructure the response data and exclude the _id field
             setProfile({ ...profileData, id: _id }); // Set the id field separately
             console.log(profileData);
@@ -89,7 +89,7 @@ const EditProfile = () => {
             const response = await axios.post(`http://localhost:4024/api/v1/teacher/update-profile`,
                 profile);
             toast.success("Update Successful");
-            router.push(`/doctor-profile/${id}`);
+            router.push(`/teacher-profile/${id}`);
             // You can show a success message or redirect to the doctor's profile page
         } catch (error) {
             console.error('Error updating profile:', error);
@@ -135,7 +135,7 @@ const EditProfile = () => {
                 )}
 
 
-                <Form.Group controlId="specialty" className='d-flex gap-3 mt-3'>
+                {/* <Form.Group controlId="specialty" className='d-flex gap-3 mt-3'>
                     <Form.Label>Specialty</Form.Label>
                     <Form.Control
                         type="text"
@@ -143,7 +143,7 @@ const EditProfile = () => {
                         value={profile.specialty}
                         onChange={handleInputChange}
                     />
-                </Form.Group>
+                </Form.Group> */}
 
                 <Form.Group controlId="education" className='d-flex gap-3 mt-3'>
                     <Form.Label>Education</Form.Label>
@@ -165,7 +165,7 @@ const EditProfile = () => {
                     />
                 </Form.Group>
 
-                <Form.Group controlId="address" className='d-flex gap-3 mt-3'>
+                {/* <Form.Group controlId="address" className='d-flex gap-3 mt-3'>
                     <Form.Label>Address</Form.Label>
                     <Form.Control
                         type="text"
@@ -173,7 +173,7 @@ const EditProfile = () => {
                         value={profile.address}
                         onChange={handleInputChange}
                     />
-                </Form.Group>
+                </Form.Group> */}
 
                 <Form.Group controlId="department" className='d-flex gap-3 mt-3'>
                     <Form.Label>Department</Form.Label>
@@ -193,7 +193,7 @@ const EditProfile = () => {
                 </Form.Group>
 
 
-                <Form.Group controlId="shortDescription" className='d-flex gap-3 mt-3'>
+                {/* <Form.Group controlId="shortDescription" className='d-flex gap-3 mt-3'>
                     <Form.Label>Description</Form.Label>
                     <Form.Control
                         as="textarea"
@@ -202,7 +202,7 @@ const EditProfile = () => {
                         value={profile.shortDescription}
                         onChange={handleInputChange}
                     />
-                </Form.Group>
+                </Form.Group> */}
 
 
 

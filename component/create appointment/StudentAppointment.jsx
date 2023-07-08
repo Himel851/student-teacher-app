@@ -18,17 +18,19 @@ const StudentAppointment = () => {
   //   slot: '',
   //   reason: '',
   // });
-  
+
   const [appointmentData, setAppointmentData] = useState({
-    teacherId: router?.query?.id?.toString() ?? '',
-    studentId: auth?._id.toString() ?? '',
+    teacherId: router?.query?.id ?? '',
+    studentId: auth?._id ?? '',
     slot: '',
     reason: '',
   });
-  
+
+  console.log(auth?._id)
 
 
-  
+
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setAppointmentData({ ...appointmentData, [name]: value });
@@ -49,6 +51,7 @@ const StudentAppointment = () => {
       const appointment = response.data;
       // console.log('Appointment created:', appointment);
       toast.success('Appointment created successfully!');
+      router.push('/teacher-list');
       // if (response.status === 200) {
       //     const appointment = response.data;
       //     console.log('Appointment created:', appointment);
@@ -115,7 +118,7 @@ const StudentAppointment = () => {
           <div className=''>
             <Form.Group controlId="formName">
               <Form.Label>Slot</Form.Label>
-              <Form.Control style={inputStyle} name='slot' type="date" placeholder=" time" value={appointmentData.slot}
+              <Form.Control style={inputStyle} name='slot' type="datetime-local" placeholder=" time" value={appointmentData.slot}
                 onChange={handleInputChange} />
             </Form.Group>
 
