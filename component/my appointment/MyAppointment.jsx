@@ -58,14 +58,14 @@ const MyAppointment = () => {
                         list?.data?.map((item) => (
                             <tr key={item?._id}>
                                 <td>{item?.teacherName}</td>
-                                <td>{item?.teacherDepartment}</td>
+                                <td>{item?.teacherDepartmentName}</td>
                                 <td>{item?.slot}</td>
                                 <td>{item?.reason}</td>
                                 <td>
-                                    {item?.isApprovedByDoctor ? <>
+                                    {item?.isApprovedByTeacher ? <>
                                         <h3>Approved</h3>
                                     </> : <>
-                                        {item?.isRejectedByDoctor ? <>
+                                        {item?.isRejectedByTeacher ? <>
                                             <h3>Rejected</h3>
                                         </> : <>
                                             <h3>Pending</h3>
