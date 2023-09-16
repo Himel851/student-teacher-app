@@ -46,7 +46,7 @@ const Header = () => {
                             {
                                 auth?.role === 'admin' && <>
                                     <Link href="/dashboard" className="text-dark nav-link arrow-none fw-bold" >Dashboard</Link>
-                                    <Link href="/teacher-list" className="text-dark nav-link arrow-none fw-bold" >Teacher's List</Link>
+                                    <Link href="/teacher-list" className="text-dark nav-link arrow-none fw-bold" >Teachers List</Link>
                                     {/* <Link href="/student-list" className="text-dark nav-link arrow-none fw-bold" >Student's List</Link> */}
                                     <Link href="/pending-doctor" className="text-dark nav-link arrow-none fw-bold" >Pending List</Link>
                                     <Link href="/approve-doctor" className="text-dark nav-link arrow-none fw-bold" >Approved List</Link>
@@ -66,7 +66,7 @@ const Header = () => {
 
                                 </>
                             }
-                            {/* <Link href="/patient-profile" className="text-dark nav-link arrow-none fw-bold" >Profile</Link> */}
+                            
                         </Nav>
                         <div className="d-flex">
                         {
@@ -74,6 +74,8 @@ const Header = () => {
                                     <Link href="/my-profile" className="text-dark nav-link arrow-none fw-bold mx-3 mt-1" >My Profile</Link>
                                 </>
                             }
+                                    <Link href="/location" className="text-dark nav-link arrow-none fw-bold mx-3 mt-1" >Map</Link>
+
                             <Button variant="danger" onClick={handleLogout}>Logout</Button>
 
                         </div>
