@@ -74,6 +74,8 @@ const Header = () => {
                                     <Link href="/my-profile" className="text-dark nav-link arrow-none fw-bold mx-3 mt-1" >My Profile</Link>
                                 </>
                             }
+                                    <Link href="/notice" className="text-dark nav-link arrow-none fw-bold mx-3 mt-1" >Notice</Link>
+
                                     <Link href="/location" className="text-dark nav-link arrow-none fw-bold mx-3 mt-1" >Map</Link>
 
                             <Button variant="danger" onClick={handleLogout}>Logout</Button>
