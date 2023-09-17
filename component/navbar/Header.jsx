@@ -84,9 +84,8 @@ const Header = () => {
                                     <Dropdown.Item as={Link} href="/view">View</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
-                            {/* <Link href="/notice" className="text-dark nav-link arrow-none fw-bold mx-3 mt-1" >Notice</Link>
 
-                            <Link href="/location" className="text-dark nav-link arrow-none fw-bold mx-3 mt-1" >Map</Link> */}
+                            <Link href="/location" className="text-dark nav-link arrow-none fw-bold mx-3 mt-1" >Map</Link>
 
                             <Button variant="danger" onClick={handleLogout}>Logout</Button>
 
