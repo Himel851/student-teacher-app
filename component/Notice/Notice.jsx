@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 
 const Notice = () => {
     const [title, setTitle] = useState('');
     const [details, setDetails] = useState('');
-    const [submitted, setSubmitted] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,9 +15,8 @@ const Notice = () => {
                 title,
                 details,
             });
-
             if (response.status === 200) {
-                setSubmitted(true);
+            toast.success('Notice created successfully!');
                 setTitle('');
                 setDetails('');
             } else {
@@ -25,13 +24,15 @@ const Notice = () => {
             }
         } catch (error) {
             console.error('An error occurred:', error);
+            toast.error('Notice created failed!');
+
         }
     };
 
     return (
-        <div className='globalTop'>
+        <div style={{ marginTop: '5rem' }}>
             <Container>
-                <h1>Awesome Notice Form</h1>
+                <h1>Notice Form</h1>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="title">
                         <Form.Label>Title:</Form.Label>
@@ -56,12 +57,10 @@ const Notice = () => {
                         />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" type="submit" className='mt-3'>
                         Submit
                     </Button>
                 </Form>
-
-                {submitted && <p>Notice submitted successfully!</p>}
             </Container>
         </div>
     )

@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link';
 import { useAuth } from '../../context/auth';
 import { useRouter } from 'next/router';
-import { Button, Container, Nav, Navbar } from 'react-bootstrap';
+import { Button, Container, Dropdown, Nav, Navbar } from 'react-bootstrap';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
 
@@ -66,17 +66,27 @@ const Header = () => {
 
                                 </>
                             }
-                            
+
                         </Nav>
                         <div className="d-flex">
-                        {
+                            {
                                 auth?.role === 'student' && <>
                                     <Link href="/my-profile" className="text-dark nav-link arrow-none fw-bold mx-3 mt-1" >My Profile</Link>
                                 </>
                             }
-                                    <Link href="/notice" className="text-dark nav-link arrow-none fw-bold mx-3 mt-1" >Notice</Link>
+                            <Dropdown className='mx-4' data-bs-theme="dark">
+                                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                                    Notice
+                                </Dropdown.Toggle>
 
-                                    <Link href="/location" className="text-dark nav-link arrow-none fw-bold mx-3 mt-1" >Map</Link>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item as={Link} href="/notice">Create</Dropdown.Item>
+                                    <Dropdown.Item as={Link} href="/view">View</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                            {/* <Link href="/notice" className="text-dark nav-link arrow-none fw-bold mx-3 mt-1" >Notice</Link>
+
+                            <Link href="/location" className="text-dark nav-link arrow-none fw-bold mx-3 mt-1" >Map</Link> */}
 
                             <Button variant="danger" onClick={handleLogout}>Logout</Button>
 
