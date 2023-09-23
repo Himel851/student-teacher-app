@@ -48,9 +48,9 @@ const Header = () => {
                                     <Link href="/dashboard" className="text-dark nav-link arrow-none fw-bold" >Dashboard</Link>
                                     <Link href="/teacher-list" className="text-dark nav-link arrow-none fw-bold" >Teachers List</Link>
                                     {/* <Link href="/student-list" className="text-dark nav-link arrow-none fw-bold" >Student's List</Link> */}
-                                    <Link href="/pending-doctor" className="text-dark nav-link arrow-none fw-bold" >Pending List</Link>
-                                    <Link href="/approve-doctor" className="text-dark nav-link arrow-none fw-bold" >Approved List</Link>
-                                    <Link href="/rejected-doctor" className="text-dark nav-link arrow-none fw-bold" >Rejected List</Link>
+                                    <Link href="/pending-teacher" className="text-dark nav-link arrow-none fw-bold" >Pending List</Link>
+                                    <Link href="/approve-teacher" className="text-dark nav-link arrow-none fw-bold" >Approved List</Link>
+                                    <Link href="/rejected-teacher" className="text-dark nav-link arrow-none fw-bold" >Rejected List</Link>
                                 </>
                             }
                             {
