@@ -33,15 +33,15 @@ const TeacherProfile = () => {
     <div style={{ marginTop: '4rem' }}>
       <Container>
         <Row className='pt-5'>
-          <Col xl={4} md={6}  >
+          <Col  md={6}  xl={3}   >
             {teacher?.profileImage ? (
-              <img src={teacher.profileImage} width={400} height={300} />
+              <img  className='rounded' src={teacher.profileImage} width={250} height={200} />
             ) : (
-              <img src="/image/no-photo.png" width={400} height={300} />
+              <img className='rounded'  src="/image/no-photo.png" width={250} height={200} />
             )}
 
 
-            <h3> {teacher?.name}</h3>
+            <h3 className='mt-3'> {teacher?.name}</h3>
             <p><b>Phone -</b> {teacher?.phone} </p>
             <p><b>Email -</b> {teacher?.email} </p>
             {auth?.role === 'student' && <>
@@ -49,23 +49,30 @@ const TeacherProfile = () => {
                 <Button variant="success">Get Appointment </Button>
               </Link></>}
 
-            {auth?.role === 'teacher' && <div className='d-flex justify-content-center'>
-              <Link href={`/edit-profile?id=${teacher?._id}`} as={`/edit-profile?id=${teacher?._id}`}>
-                <Button variant="success" className="mt-4">Edit Profile</Button>
-              </Link>
-
+            <div className='d-none d-md-block'>
+              {auth?.role === 'teacher' && <div className='d-flex justify-content-center'>
+                <Link href={`/edit-profile?id=${teacher?._id}`} as={`/edit-profile?id=${teacher?._id}`}>
+                  <Button variant="success" className="mt-4">Edit Profile</Button>
+                </Link>
+              </div>
+              }
             </div>
 
-            }
-
           </Col>
-          <Col xl={8} md={6}  >
+          <Col  md={6}  xl={7}   >
             <p><b>Gender -</b> {teacher?.gender} </p>
             <p><b>Age -</b> {teacher?.age} </p>
             <p><b>Department -</b> {teacher?.department}</p>
             <p> <b>Education -</b> {teacher?.education}</p>
             <p> <b>Experience  -</b> {teacher?.experience} </p>
-
+            <div className='d-block d-md-none'>
+              {auth?.role === 'teacher' && <div className='d-flex justify-content-center'>
+                <Link href={`/edit-profile?id=${teacher?._id}`} as={`/edit-profile?id=${teacher?._id}`}>
+                  <Button variant="success" className="mt-4">Edit Profile</Button>
+                </Link>
+              </div>
+              }
+            </div>
           </Col>
         </Row>
       </Container>

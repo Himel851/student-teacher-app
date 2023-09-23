@@ -69,21 +69,25 @@ const Header = () => {
 
                         </Nav>
                         <div className="d-flex">
-                            {
+                            {/* {
                                 auth?.role === 'student' && <>
                                     <Link href="/my-profile" className="text-dark nav-link arrow-none fw-bold mx-3 mt-1" >My Profile</Link>
                                 </>
-                            }
-                            <Dropdown className='mx-4' data-bs-theme="dark">
-                                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                                    Notice
-                                </Dropdown.Toggle>
+                            } */}
+                            {
+                                auth?.role === 'teacher' || auth?.role === 'admin' &&
+                                <Dropdown className='mx-4' data-bs-theme="dark">
+                                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                                        Notice
+                                    </Dropdown.Toggle>
 
-                                <Dropdown.Menu>
-                                    <Dropdown.Item as={Link} href="/notice">Create</Dropdown.Item>
-                                    <Dropdown.Item as={Link} href="/view">View</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item as={Link} href="/notice">Create</Dropdown.Item>
+                                        <Dropdown.Item as={Link} href="/view">View</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            }
+
 
                             <Link href="/location" className="text-dark nav-link arrow-none fw-bold mx-3 mt-1" >Map</Link>
 
