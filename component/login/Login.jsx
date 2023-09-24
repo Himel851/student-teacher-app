@@ -61,7 +61,7 @@ const Login = () => {
                 className={style.studentLogin}
                 style={{
                     backgroundImage: `url(${'/image/bg.jpg'})`,
-                    height: "100vh",
+                    height: "800px",
                     backgroundSize: "cover",
                 }}
             >
