@@ -93,7 +93,10 @@ const Header = () => {
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
-                                    {!auth?.role === 'student' &&
+                                    {auth?.role === 'teacher' &&
+                                        <Dropdown.Item as={Link} href="/notice">Create</Dropdown.Item>
+                                    }
+                                     {auth?.role === 'admin' &&
                                         <Dropdown.Item as={Link} href="/notice">Create</Dropdown.Item>
                                     }
                                     <Dropdown.Item as={Link} href="/view">View</Dropdown.Item>
