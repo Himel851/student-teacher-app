@@ -29,15 +29,15 @@ const StudentProfile = () => {
 
   return (
     <div style={{ marginTop: '4rem', padding: '30px' }}>
-        <Container>
+      <Container>
         <Row>
-          <Col md={6}  xl={3}  className='mt-3'>
-          {student?.profilePic ? (
-              <img  className='rounded' src={student?.profilePic} width={250} height={200} />
+          <Col md={6} xl={3} className='mt-3'>
+            {student?.profilePic ? (
+              <img className='rounded' src={student?.profilePic} width={250} height={200} />
             ) : (
-              <img className='rounded'  src="/image/no-photo.png" width={250} height={200} />
+              <img className='rounded' src="/image/no-photo.png" width={250} height={200} />
             )}
-           <div className='d-none d-md-block'>
+            <div className='d-none d-md-block'>
               {auth?.role === 'student' && <div className='d-flex justify-content-center'>
                 <Link href={`/edit-student-profile?id=${auth?._id}`} as={`/edit-student-profile?id=${student?._id}`}>
                   <Button variant="success" className="mt-4">Edit Profile</Button>
@@ -46,11 +46,11 @@ const StudentProfile = () => {
               }
             </div>
           </Col>
-          <Col md={6}  xl={7} className='mt-3'>
-           <p className='fs-2'> <b>Name:</b>  {student?.name}</p>
-           <p className='fs-2'> <b>Email:</b>  {student?.email}</p>
-           <p className='fs-2'> <b>age:</b>  {student?.age}</p>
-           <p className='fs-2'> <b>Number:</b>  {student?.phone}</p>
+          <Col md={6} xl={7} className='mt-3'>
+            <p className='fs-2'> <b>Name:</b>  {student?.name}</p>
+            <p className='fs-2'> <b>Email:</b>  {student?.email}</p>
+            <p className='fs-2'> <b>age:</b>  {student?.age}</p>
+            <p className='fs-2'> <b>Number:</b>  {student?.phone}</p>
           </Col>
         </Row>
       </Container>
