@@ -43,7 +43,7 @@ const Admin = () => {
             <Card.Text>Total Student {data?.studentNo}</Card.Text>
           </Card>
         </Col>
-        <Col className="my-2" xl={4} sm={12}>
+        {/* <Col className="my-2" xl={4} sm={12}>
           <Card className="p-3 text-center">
             <div>
               <FiUsers
@@ -60,7 +60,7 @@ const Admin = () => {
 
 
           </Card>
-        </Col>
+        </Col> */}
         <Col className="my-2" xl={4} sm={12}>
           <Card className="p-3 text-center">
             <div>
