@@ -80,9 +80,20 @@ const EditStudentProfile = () => {
   return (
     <div style={{ margin: '5rem 40vh' }}>
       <Form onSubmit={handleSubmit}>
-
         <div className='d-flex  gap-4'>
-          <Form.Group controlId="name" className='d-flex  gap-3 '>
+          <Form.Group controlId="email" className='d-flex gap-3'>
+            <Form.Label>Id</Form.Label>
+            <Form.Control
+              type="text"
+              name="id"
+              value={profile?.idNo}
+              onChange={handleInputChange}
+              disabled
+            />
+          </Form.Group>
+        </div>
+        <div className='d-flex  gap-4'>
+          <Form.Group controlId="name" className='d-flex  gap-3 mt-3'>
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
@@ -91,7 +102,7 @@ const EditStudentProfile = () => {
               onChange={handleInputChange}
             />
           </Form.Group>
-          <Form.Group controlId="phone" className='d-flex gap-3 '>
+          <Form.Group controlId="phone" className='d-flex gap-3 mt-3'>
             <Form.Label>Phone</Form.Label>
             <Form.Control
               type="phone"

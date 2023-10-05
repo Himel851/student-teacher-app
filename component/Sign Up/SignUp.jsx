@@ -19,6 +19,7 @@ const SignUp = () => {
         password: '',
         department: "",
         teacherId: "",
+        idNo: "",
     });
     const [userType, setUserType] = useState('student');
 
@@ -29,7 +30,7 @@ const SignUp = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        const { name, age, gender, phone, email, password, department, teacherId } = formData;
+        const { name, age, gender, phone, email, password, department, teacherId, idNo } = formData;
         let payload = { name, age, gender, phone, email, password };
 
         // Extract department name from the department object
@@ -37,6 +38,9 @@ const SignUp = () => {
 
         if (userType === "teacher") {
             payload = { ...payload, department: departmentName, teacherId };
+        }
+        if (userType === "student") {
+            payload = { ...payload, idNo };
         }
         console.log(payload);
         try {
@@ -104,7 +108,7 @@ const SignUp = () => {
                             </div>
 
                             <div className="d-flex gap-2">
-                                <Form.Group controlId="formBasicName" className="mb-1" md="6" lg="4">
+                                <Form.Group controlId="formBasicName" className="mb-1" md="6" lg="6">
                                     <Form.Label>Name</Form.Label>
                                     <Form.Control
                                         style={{ width: '90%' }}
@@ -115,8 +119,7 @@ const SignUp = () => {
                                         onChange={handleInputChange}
                                     />
                                 </Form.Group>
-
-                                <Form.Group controlId="formBasicEmail" className="mb-1" md="6" lg="4">
+                                <Form.Group controlId="formBasicEmail" className="mb-1" md="6" lg="6">
                                     <Form.Label>Email address</Form.Label>
                                     <Form.Control
                                         style={{ width: '90%' }}
@@ -126,9 +129,21 @@ const SignUp = () => {
                                         value={formData.email}
                                         onChange={handleInputChange}
                                     />
-
                                 </Form.Group>
                             </div>
+                            {userType === "student" && <>
+                                <Form.Group controlId="formBasicEmail" className="mb-1" md="6" lg="6">
+                                    <Form.Label>ID</Form.Label>
+                                    <Form.Control
+                                        style={{ width: '90%' }}
+                                        type="text"
+                                        placeholder="Enter id"
+                                        name="idNo" className="form-control" required
+                                        value={formData.idNo}
+                                        onChange={handleInputChange}
+                                    />
+                                </Form.Group>
+                            </>}
 
 
                             <div className='d-flex middle mt-3'>
