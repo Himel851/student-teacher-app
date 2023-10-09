@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 const Notice = () => {
     const [title, setTitle] = useState('');
     const [details, setDetails] = useState('');
+    const [deactivateTime, setDeactivateTime] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -14,11 +15,13 @@ const Notice = () => {
             const response = await axios.post('http://localhost:4024/api/v1/notice/create', {
                 title,
                 details,
+                deactivateTime,
             });
             if (response.status === 200) {
-            toast.success('Notice created successfully!');
+                toast.success('Notice created successfully!');
                 setTitle('');
                 setDetails('');
+                setDeactivateTime('');
             } else {
                 console.error('Error submitting notice.');
             }
@@ -56,6 +59,17 @@ const Notice = () => {
                             required
                         />
                     </Form.Group>
+
+                    <Form.Group controlId="time">
+                        <Form.Label>Deactivate Time:</Form.Label>
+                        <Form.Control
+                            type="datetime-local"
+                            value={deactivateTime}
+                            onChange={(e) => setDeactivateTime(e.target.value)}
+                            required
+                        />
+                    </Form.Group>
+                    
 
                     <Button variant="primary" type="submit" className='mt-3'>
                         Submit
