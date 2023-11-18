@@ -1,84 +1,70 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { useAuth } from '../../context/auth';
-import { useRouter } from 'next/router';
-import { Button, Table } from 'react-bootstrap';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../../context/auth";
+import { useRouter } from "next/router";
+import { Button, Container, Table } from "react-bootstrap";
 
 const MyAppointment = () => {
-    const [auth, setAuth] = useAuth();
-    const [list, setList] = useState([]);
-    const router = useRouter();
+  const [auth, setAuth] = useAuth();
+  const [list, setList] = useState([]);
+  const router = useRouter();
 
-    console.log(auth?._id)
+  console.log(auth?._id);
 
-    useEffect(() => {
-        const fetchInvoiceData = async () => {
-            try {
+  useEffect(() => {
+    const fetchInvoiceData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:4024/api/v1/appointment/view/student/${auth?._id}`
+        );
+        setList(response?.data);
+        console.log(response?.data);
+      } catch (error) {
+        // toast.error("Something went wrong");
+      }
+    };
 
-                const response = await axios.get(`http://localhost:4024/api/v1/appointment/view/student/${auth?._id}`);
-                setList(response?.data);
-                console.log(response?.data)
-            } catch (error) {
-                // toast.error("Something went wrong");
-            }
-        };
+    fetchInvoiceData();
+  }, [router.query.id]);
 
-        fetchInvoiceData();
-    }, [router.query.id]);
+  return (
+    <div style={{ marginTop: "4rem", padding: "30px" }}>
+      <Container>
+        <Table responsive striped bordered hover>
+          <thead>
+            <tr>
+              <th>
+                <strong>Slot</strong>
+              </th>
+              <th>
+                <strong>Reason</strong>
+              </th>
+              <th>
+                <strong>Status</strong>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {list?.data?.map((item) => (
+              <tr key={item?._id}>
+                <td>{item?.slot}</td>
+                <td>{item?.reason}</td>
+                <td>
+                  {item?.isApprovedByTeacher ? (
+                    <span className="text-success fw-bold">Approved</span>
+                  ) : item?.isRejectedByTeacher ? (
+                    <span className="text-danger fw-bold">Rejected</span>
+                  ) : (
+                    <span className="text-success fw-bold">Pending</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Container>
+    </div>
+  );
+};
 
-    console.log(list?.data?.teacherId)
-
-
-    
-
-    return (
-        <div style={{ marginTop: '4rem', padding: '30px' }}>
-            <Table responsive striped bordered hover>
-                <thead>
-                    <tr>
-                        {/* <th>
-                            <strong>Teacher Name</strong>
-                        </th>
-                        <th>
-                            <strong>Department</strong>
-                        </th> */}
-                        <th>
-                            <strong>Slot</strong>
-                        </th>
-                        <th>
-                            <strong>Reason</strong>
-                        </th>
-                        <th>
-                            <strong>Actions</strong>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        list?.data?.map((item) => (
-                            <tr key={item?._id}>
-                                {/* <td>{item?.teacherName}</td>
-                                <td>{item?.teacherDepartmentName}</td> */}
-                                <td>{item?.slot}</td>
-                                <td>{item?.reason}</td>
-                                <td>
-                                    {item?.isApprovedByTeacher ? <>
-                                        <h3>Approved</h3>
-                                    </> : <>
-                                        {item?.isRejectedByTeacher ? <>
-                                            <h3>Rejected</h3>
-                                        </> : <>
-                                            <h3>Pending</h3>
-                                        </>}
-                                    </>}
-                                </td>
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </Table>
-        </div>
-    )
-}
-
-export default MyAppointment
+export default MyAppointment;

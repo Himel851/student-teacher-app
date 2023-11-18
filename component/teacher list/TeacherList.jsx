@@ -71,12 +71,12 @@ const TeacherList = () => {
             <Container>
                 <Row>
                     {teachers.length > 0 ? <> {teachers.map(teacher => (
-                        <Col xl={3} md={6} sm={12} className='mt-3' key={teacher._id}>
-                            <Card style={{ width: '18rem' }}>
+                        <Col xl={3} md={4} sm={12} className='mt-3' key={teacher._id}>
+                            <Card >
                                 <Card.Img
                                     variant="top"
                                     src={teacher?.profileImage || "/image/no-photo.png"}
-                                    style={{ height: "35vh", width: "41vh" }}
+                                    style={{ height: "35vh" }}
                                 />
 
                                 <Card.Body>
