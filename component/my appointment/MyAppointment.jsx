@@ -28,7 +28,7 @@ const MyAppointment = () => {
   }, [router.query.id]);
 
   return (
-    <div style={{ marginTop: "4rem", padding: "30px" }}>
+    <div style={{ marginTop: "4rem", padding: "30px", background: 'var(--bg-color)', height: '100vh' }}>
       <Container>
         <Table responsive striped bordered hover>
           <thead>

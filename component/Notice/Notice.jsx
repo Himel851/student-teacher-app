@@ -35,7 +35,7 @@ const Notice = () => {
   };
 
   return (
-    <div style={{ marginTop: "5rem" }}>
+    <div style={{ marginTop: "4rem", padding: "30px", background: 'var(--bg-color2)', height: '100vh' }}>
       <Container>
         <h2 className="text-center fw-bold text-muted">Notice Form</h2>
         <hr />
@@ -46,7 +46,7 @@ const Notice = () => {
           <Row className="d-flex justify-content-center">
             <Col md={6}>
               <Form.Group controlId="title">
-                <Form.Label>Title:</Form.Label>
+                <Form.Label className="fw-bold">Title:</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter title"
@@ -60,7 +60,7 @@ const Notice = () => {
           <Row className="d-flex justify-content-center">
             <Col md={6}>
               <Form.Group controlId="details">
-                <Form.Label>Details:</Form.Label>
+                <Form.Label className="fw-bold mt-3">Details:</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={4}
@@ -75,7 +75,7 @@ const Notice = () => {
           <Row className="d-flex justify-content-center">
             <Col md={6}>
               <Form.Group controlId="time">
-                <Form.Label>Deactivate Time:</Form.Label>
+                <Form.Label className="fw-bold mt-3">Deactivate Time:</Form.Label>
                 <Form.Control
                   type="datetime-local"
                   value={deactivateTime}

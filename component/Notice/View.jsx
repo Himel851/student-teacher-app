@@ -20,7 +20,7 @@ const View = () => {
         noticeData();
     }, [])
     return (
-        <div style={{ marginTop: '5rem' }}>
+        <div style={{ marginTop: '5rem', background: 'var(--bg-color)', }}>
             <Container>
                 <Row>
                     {viewNotice?.data?.map((data) => (

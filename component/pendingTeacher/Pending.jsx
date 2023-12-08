@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './pending.module.scss'
 import axios from 'axios';
-import { Button, Table } from 'react-bootstrap';
+import { Button, Container, Table } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 const Pending = () => {
@@ -54,40 +54,42 @@ const Pending = () => {
       
     
   return (
-    <div style={{ marginTop: '4rem' }} className={styles.pending}>
-      <Table striped bordered hover responsive>
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>RegId</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Email</th>
-            <th>Gender</th>
-            <th>Department</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {doctorList.map((teacher, index) => (
-            <tr key={teacher._id}>
-              <td>{index + 1}</td>
-              <td>{teacher.teacherId}</td>
-              <td>{teacher.name}</td>
-              <td>{teacher.age}</td>
-              <td>{teacher.email}</td>
-              <td>{teacher.gender}</td>
-              <td>{teacher.department}</td>
-              <td>
-                <div className='d-flex gap-2'>
-                  <Button variant="success" onClick={() => handleApprove(teacher._id)}>Approve</Button>
-                  <Button variant="danger" onClick={() => handleReject(teacher._id)}>Reject</Button>
-                </div>
-              </td>
+    <div style={{ marginTop: "4rem", padding: "30px", background: 'var(--bg-color2)', height: '100vh' }} className={styles.pending}>
+      <Container>
+        <Table striped bordered hover responsive>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>RegId</th>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Email</th>
+              <th>Gender</th>
+              <th>Department</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {doctorList.map((teacher, index) => (
+              <tr key={teacher._id}>
+                <td>{index + 1}</td>
+                <td>{teacher.teacherId}</td>
+                <td>{teacher.name}</td>
+                <td>{teacher.age}</td>
+                <td>{teacher.email}</td>
+                <td>{teacher.gender}</td>
+                <td>{teacher.department}</td>
+                <td>
+                  <div className='d-flex gap-2'>
+                    <Button variant="success" onClick={() => handleApprove(teacher._id)}>Approve</Button>
+                    <Button variant="danger" onClick={() => handleReject(teacher._id)}>Reject</Button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Container>
     </div>
   )
 }

@@ -25,9 +25,9 @@ const StudentProfile = () => {
   }, [auth?._id]);
 
   return (
-    <div className="bg-light" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
-      <Container className="p-3 profileHeight bg-white rounded">
-        <Row>
+    <div  style={{ paddingTop: '4rem', paddingBottom: '4rem', background: 'var(--bg-color)',  height: '100vh' }}>
+      <Container className="p-3 profileHeight rounded mt-5" style={{background: 'var(--bg-white)', height: '70vh'}}>
+        <Row className='mt-5'>
           <Col md={4}>
             <div className="text-center">
               {student?.profilePic ? (
@@ -56,7 +56,7 @@ const StudentProfile = () => {
 
             {auth?.role === 'student' && (
               <div className=''>
-                <Link href={`/edit-student-profile?id=${id}`} as={`/edit-student-profile?id=${student?._id}`}>
+                <Link href={`/edit-student-profile?id=${student?._id}`}>
                   <Button style={{ backgroundColor: '#239bb5' }} className="mt-4">Edit Profile</Button>
                 </Link>
               </div>

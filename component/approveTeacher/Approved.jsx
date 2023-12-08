@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Table } from 'react-bootstrap';
+import { Container, Table } from 'react-bootstrap';
 import styles from './approve.module.scss'
 
 const Approved = () => {
@@ -21,33 +21,35 @@ const Approved = () => {
     };
 
     return (
-        <div style={{ marginTop: '4rem' }} className={`${styles.approve}`} >
-            <Table striped bordered hover responsive>
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>TeacherId</th>
-                        <th>Name</th>
-                        <th>Age</th>
-                        <th>Email</th>
-                        <th>Gender</th>
-                        <th>Department</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {teacherList.map((data, index) => (
-                        <tr key={data._id}>
-                            <td>{index + 1}</td>
-                            <td>{data.teacherId}</td>
-                            <td>{data.name}</td>
-                            <td>{data.age}</td>
-                            <td>{data.email}</td>
-                            <td>{data.gender}</td>
-                            <td>{data.department}</td>
+        <div style={{ marginTop: "4rem", padding: "30px", background: 'var(--bg-color2)', height: '100vh' }} className={`${styles.approve}`} >
+            <Container>
+                <Table striped bordered hover responsive>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>TeacherId</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Email</th>
+                            <th>Gender</th>
+                            <th>Department</th>
                         </tr>
-                    ))}
-                </tbody>
-            </Table>
+                    </thead>
+                    <tbody>
+                        {teacherList.map((data, index) => (
+                            <tr key={data._id}>
+                                <td>{index + 1}</td>
+                                <td>{data.teacherId}</td>
+                                <td>{data.name}</td>
+                                <td>{data.age}</td>
+                                <td>{data.email}</td>
+                                <td>{data.gender}</td>
+                                <td>{data.department}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
+            </Container>
         </div>
     )
 }

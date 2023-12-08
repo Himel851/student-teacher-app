@@ -49,11 +49,11 @@ const TeacherList = () => {
     };
 
     return (
-        <div style={{ marginTop: '4rem' }}>
-            <div className='d-flex justify-content-center gap-3' style={{ padding: '30px' }}>
+        <div style={{ marginTop: '4rem', background: 'var(--bg-color)' }} className='pb-5'>
+            <div className='d-flex justify-content-center gap-3 ' style={{ padding: '30px' }}>
                 <Dropdown>
                     <div className='d-flex justify-content-center gap-3' >
-                        <h4>Select Department: </h4>
+                        <h4 className='text-white'>Select Department: </h4>
                         <Dropdown.Toggle variant="success" id="dropdown-basic">
                             {selectedDepartment}
                         </Dropdown.Toggle>
@@ -69,7 +69,7 @@ const TeacherList = () => {
             </div>
 
             <Container>
-                <Row>
+                <Row className='pb-5'>
                     {teachers.length > 0 ? <> {teachers.map(teacher => (
                         <Col xl={3} md={4} sm={12} className='mt-3' key={teacher._id}>
                             <Card >

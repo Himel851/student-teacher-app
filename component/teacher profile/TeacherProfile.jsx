@@ -30,14 +30,14 @@ const TeacherProfile = () => {
 
 
   return (
-    <div style={{ marginTop: '4rem' }}>
-      <Container>
-        <Row className='pt-5'>
-          <Col  md={6}  xl={3}   >
+    <div style={{ marginTop: "4rem", padding: "30px", background: 'var(--bg-color2)', height: '100vh' }} >
+      <Container className='bg-white rounded'>
+        <div className='d-flex gap-5 justify-content-center py-4'>
+          <div>
             {teacher?.profileImage ? (
-              <img  className='rounded' src={teacher.profileImage} width={250} height={200} />
+              <img className='rounded' src={teacher.profileImage} width={250} height={200} />
             ) : (
-              <img className='rounded'  src="/image/no-photo.png" width={250} height={200} />
+              <img className='rounded' src="/image/no-photo.png" width={250} height={200} />
             )}
 
 
@@ -57,9 +57,8 @@ const TeacherProfile = () => {
               </div>
               }
             </div>
-
-          </Col>
-          <Col  md={6}  xl={7}   >
+          </div>
+          <div>
             <p><b>Gender -</b> {teacher?.gender} </p>
             <p><b>Age -</b> {teacher?.age} </p>
             <p><b>Department -</b> {teacher?.department}</p>
@@ -73,8 +72,9 @@ const TeacherProfile = () => {
               </div>
               }
             </div>
-          </Col>
-        </Row>
+          </div>
+        </div>
+
       </Container>
     </div >
   )

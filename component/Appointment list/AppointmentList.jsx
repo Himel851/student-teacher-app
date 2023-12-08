@@ -47,52 +47,55 @@ export default function AppointmentList() {
 
 
   return (
-    <Container className="py-5" style={{ marginTop: '4rem' }}>
-      <Table responsive striped bordered hover>
-        <thead>
-          <tr>
-            <th>No</th>
+    <div style={{ marginTop: "2rem", padding: "30px", background: 'var(--bg-color2)', height: '100vh' }}>
+      <Container className="py-5" >
+        <Table responsive striped bordered hover>
+          <thead>
+            <tr>
+              <th>No</th>
 
-            <th>
-              <strong>Slot</strong>
-            </th>
-            <th>
-              <strong>Reason</strong>
-            </th>
-            <th>
-              <strong>Actions</strong>
-            </th>
+              <th>
+                <strong>Slot</strong>
+              </th>
+              <th>
+                <strong>Reason</strong>
+              </th>
+              <th>
+                <strong>Actions</strong>
+              </th>
 
-          </tr>
-        </thead>
-        <tbody>
-          {list?.map((data, index) => (
-            <tr key={data._id}>
-              <td>{index + 1}</td>
-              <td>{data?.slot}</td>
-              <td>{data?.reason}</td>
-
-              <td>
-                {
-                  data?.isApprovedByTeacher ? <>
-                    <h4>Approved</h4>
-                  </> : <>
-                    {data?.isRejectedByTeacher ? <>
-                      <h4>Rejected</h4>
-                    </> : <>
-                      <div className='d-flex gap-2'>
-                        <Button variant="success" onClick={() => handleApprove(data._id)}>Approve</Button>
-                        <Button variant="danger" onClick={() => handleReject(data._id)}>Reject</Button>
-                      </div></>}
-                  </>
-                }
-
-              </td>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-    </Container>
+          </thead>
+          <tbody>
+            {list?.map((data, index) => (
+              <tr key={data._id}>
+                <td>{index + 1}</td>
+                <td>{data?.slot}</td>
+                <td>{data?.reason}</td>
+
+                <td>
+                  {
+                    data?.isApprovedByTeacher ? <>
+                      <h4>Approved</h4>
+                    </> : <>
+                      {data?.isRejectedByTeacher ? <>
+                        <h4>Rejected</h4>
+                      </> : <>
+                        <div className='d-flex gap-2'>
+                          <Button variant="success" onClick={() => handleApprove(data._id)}>Approve</Button>
+                          <Button variant="danger" onClick={() => handleReject(data._id)}>Reject</Button>
+                        </div></>}
+                    </>
+                  }
+
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Container>
+    </div>
+    
   );
 }
 

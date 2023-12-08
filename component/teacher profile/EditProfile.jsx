@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -97,45 +97,117 @@ const EditProfile = () => {
     };
 
     return (
-        <div style={{ margin: '5rem 40vh' }}>
-            <Form onSubmit={handleSubmit}>
+        <div style={{ marginTop: "4rem", padding: "30px", background: 'var(--bg-color2)', height: '100vh' }}>
+            <Container className="bg-white rounded">
+                <Form onSubmit={handleSubmit} className='py-3'>
 
-                <div className='d-flex  gap-4'>
-                    <Form.Group controlId="name" className='d-flex gap-3 '>
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="name"
-                            value={profile.name}
-                            onChange={handleInputChange}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="phone" className='d-flex gap-3 '>
-                        <Form.Label>Phone</Form.Label>
-                        <Form.Control
-                            type="phone"
-                            name="phone"
-                            value={profile.phone}
-                            onChange={handleInputChange}
-                        />
-                    </Form.Group>
-                </div>
+                    <Row className="d-flex justify-content-center ">
+                        <Col md={6}>
+                            <Form.Group controlId="name" className='d-flex gap-3 '>
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="name"
+                                    value={profile.name}
+                                    onChange={handleInputChange}
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row className="d-flex justify-content-center ">
+                        <Col md={6}>
+                            <Form.Group controlId="phone" className='d-flex gap-3 mt-3'>
+                                <Form.Label>Phone</Form.Label>
+                                <Form.Control
+                                    type="phone"
+                                    name="phone"
+                                    value={profile.phone}
+                                    onChange={handleInputChange}
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row className="d-flex justify-content-center ">
+                        <Col md={6}>
+                            <Form.Group controlId="profileImage" className='d-flex gap-3 mt-3'>
+                                <Form.Label>Profile Image</Form.Label>
+                                <input
+                                    type="file"
+                                    name="profileImage"
+                                    onChange={handleInputChange}
+                                />
+                            </Form.Group>
+                            {profile.profileImage && (
+                                <img src={profile.profileImage} alt="Profile" style={{ width: '200px', marginTop: '10px' }} />
+                            )}
+                        </Col>
+                    </Row>
+                    <Row className="d-flex justify-content-center ">
+                        <Col md={6}>
+                            <Form.Group controlId="education" className='d-flex gap-3 mt-3'>
+                                <Form.Label>Education</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="education"
+                                    value={profile.education}
+                                    onChange={handleInputChange}
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row className="d-flex justify-content-center ">
+                        <Col md={6}>
+                            <Form.Group controlId="experience" className='d-flex gap-3 mt-3'>
+                                <Form.Label>Experience</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="experience"
+                                    value={profile.experience}
+                                    onChange={handleInputChange}
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                     <Row className="d-flex justify-content-center ">
+                        <Col md={6}>
+                            <Form.Group controlId="department" className='d-flex gap-3 mt-3'>
+                                <Form.Label>Department</Form.Label>
+                                <Form.Control
+                                    as="select"
+                                    name="department"
+                                    value={profile.department}
+                                    onChange={handleInputChange}
+                                >
+                                    <option value="">Select department</option>
+                                    {departments?.map((department) => (
+                                        <option key={department._id} value={department.departmentName}>
+                                            {department.departmentName}
+                                        </option>
+                                    ))}
+                                </Form.Control>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row className="d-flex justify-content-center ">
+                        <Col md={6}>
+                            <Button variant="success" type="submit" className="mt-4">
+                                Update Profile
+                            </Button>
+                            <Link href={`/teacher-profile/${id}`}>
+                                <Button variant="success" type="submit" className="mt-4 mx-3">
+                                    Back
+                                </Button>
+                            </Link>
+                        </Col>
+                    </Row>
+                    
+                        
 
 
-                <Form.Group controlId="profileImage" className='d-flex gap-3 mt-3'>
-                    <Form.Label>Profile Image</Form.Label>
-                    <input
-                        type="file"
-                        name="profileImage"
-                        onChange={handleInputChange}
-                    />
-                </Form.Group>
-                {profile.profileImage && (
-                    <img src={profile.profileImage} alt="Profile" style={{ width: '200px', marginTop: '10px' }} />
-                )}
+                    
 
 
-                {/* <Form.Group controlId="specialty" className='d-flex gap-3 mt-3'>
+                    {/* <Form.Group controlId="specialty" className='d-flex gap-3 mt-3'>
                     <Form.Label>Specialty</Form.Label>
                     <Form.Control
                         type="text"
@@ -145,27 +217,11 @@ const EditProfile = () => {
                     />
                 </Form.Group> */}
 
-                <Form.Group controlId="education" className='d-flex gap-3 mt-3'>
-                    <Form.Label>Education</Form.Label>
-                    <Form.Control
-                        type="text"
-                        name="education"
-                        value={profile.education}
-                        onChange={handleInputChange}
-                    />
-                </Form.Group>
+                    
 
-                <Form.Group controlId="experience" className='d-flex gap-3 mt-3'>
-                    <Form.Label>Experience</Form.Label>
-                    <Form.Control
-                        type="text"
-                        name="experience"
-                        value={profile.experience}
-                        onChange={handleInputChange}
-                    />
-                </Form.Group>
+                    
 
-                {/* <Form.Group controlId="address" className='d-flex gap-3 mt-3'>
+                    {/* <Form.Group controlId="address" className='d-flex gap-3 mt-3'>
                     <Form.Label>Address</Form.Label>
                     <Form.Control
                         type="text"
@@ -175,25 +231,10 @@ const EditProfile = () => {
                     />
                 </Form.Group> */}
 
-                <Form.Group controlId="department" className='d-flex gap-3 mt-3'>
-                    <Form.Label>Department</Form.Label>
-                    <Form.Control
-                        as="select"
-                        name="department"
-                        value={profile.department}
-                        onChange={handleInputChange}
-                    >
-                        <option value="">Select department</option>
-                        {departments?.map((department) => (
-                            <option key={department._id} value={department.departmentName}>
-                                {department.departmentName}
-                            </option>
-                        ))}
-                    </Form.Control>
-                </Form.Group>
+                    
 
 
-                {/* <Form.Group controlId="shortDescription" className='d-flex gap-3 mt-3'>
+                    {/* <Form.Group controlId="shortDescription" className='d-flex gap-3 mt-3'>
                     <Form.Label>Description</Form.Label>
                     <Form.Control
                         as="textarea"
@@ -207,17 +248,12 @@ const EditProfile = () => {
 
 
 
-                {/* Add more form fields for other profile properties */}
+                    {/* Add more form fields for other profile properties */}
 
-                <Button variant="success" type="submit" className="mt-4">
-                    Update Profile
-                </Button>
-                <Link href={`/teacher-profile/${id}`}>
-                    <Button variant="success" type="submit" className="mt-4 mx-3">
-                        Back
-                    </Button>
-                </Link>
-            </Form>
+                    
+                </Form>
+            </Container>
+            
         </div>
     );
 };
