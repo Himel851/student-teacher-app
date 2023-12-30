@@ -51,32 +51,28 @@ const StudentAppointment = () => {
     }
     const formattedAppointmentData = {
       ...appointmentData,
-      slot: new Date(appointmentData.slot).toLocaleString(), // Adjust the format based on your API requirements
+      slot: new Date(appointmentData.slot).getTime().toString(),
     };
+
     createAppointment(formattedAppointmentData);
     // Handle form submission logic here
   };
 
   // Function to handle appointment creation
   const createAppointment = async (appointmentData) => {
-    console.log(appointmentData);
-    // try {
-    //   const response = await axios.post('http://localhost:4024/api/v1/appointment/create', appointmentData);
-    //   const appointment = response.data;
-    //   toast.success('Appointment created successfully!');
-    //   router.push('/teacher-list');
+    try {
+      const response = await axios.post('http://localhost:4024/api/v1/appointment/create', appointmentData);
+      const appointment = response.data;
+      toast.success('Appointment created successfully!');
+      router.push('/teacher-list');
     
-    // } catch (error) {
-    //   console.error('Error creating appointment:', error);
-    //   // Handle any network or other errors
-    // }
+    } catch (error) {
+      console.error('Error creating appointment:', error);
+      // Handle any network or other errors
+    }
   };
 
-  useEffect(() => {
-    // Call the createAppointment function when the component mounts
-    createAppointment(appointmentData);
-    createAppointment();
-  }, [router.query.id]);
+
 
   const inputStyle = {
     marginBottom: '1rem',
