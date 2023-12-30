@@ -8,16 +8,6 @@ import { toast } from 'react-toastify';
 const StudentAppointment = () => {
   const [auth, setAuth] = useAuth();
   const router = useRouter();
-  // const [appointmentData, setAppointmentData] = useState({
-  //   // teacherName: '',
-  //   teacherId: auth?._id.toString(),
-  //   // teacherAge: null,
-  //   // teacherGender: '',
-  //   // teacherPhone: '',
-  //   studentId: router.query.id.toString(), // Set doctor ID as a string using router.query.id.toString(),
-  //   slot: '',
-  //   reason: '',
-  // });
 
   const [appointmentData, setAppointmentData] = useState({
     teacherId: router?.query?.id ?? '',
@@ -26,10 +16,27 @@ const StudentAppointment = () => {
     reason: '',
   });
 
-  console.log(auth?._id)
+  const isDateTimeValid = (dateTime) => {
+    const selectedDateTime = new Date(dateTime);
+    let errorMessage = null;
 
+    // Check if the day is not Friday (5) or Saturday (6)
+    if (selectedDateTime.getDay() === 5 || selectedDateTime.getDay() === 6) {
+      errorMessage = 'Please select a day other than Friday or Saturday.';
+    }
 
+    // Check if the selected time is between 9 am (9) and 5 pm (17)
+    if (!(selectedDateTime.getHours() >= 9 && selectedDateTime.getHours() <= 17)) {
+      errorMessage = 'Please select a time between 9 am and 5 pm.';
+    }
 
+    if (errorMessage) {
+      toast.error(errorMessage);
+      return false; // Validation failed
+    }
+
+    return true; // No validation error
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -38,33 +45,31 @@ const StudentAppointment = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    createAppointment(appointmentData);
+    // Validate the slot time
+    if (!isDateTimeValid(appointmentData?.slot)) {
+      return;
+    }
+    const formattedAppointmentData = {
+      ...appointmentData,
+      slot: new Date(appointmentData.slot).toLocaleString(), // Adjust the format based on your API requirements
+    };
+    createAppointment(formattedAppointmentData);
     // Handle form submission logic here
   };
 
   // Function to handle appointment creation
   const createAppointment = async (appointmentData) => {
-    try {
-      // Make an API request to create an appointment using Axios
-      const response = await axios.post('http://localhost:4024/api/v1/appointment/create', appointmentData);
-
-      const appointment = response.data;
-      // console.log('Appointment created:', appointment);
-      toast.success('Appointment created successfully!');
-      router.push('/teacher-list');
-      // if (response.status === 200) {
-      //     const appointment = response.data;
-      //     console.log('Appointment created:', appointment);
-      //     toast.success('Appointment created successfully!');
-      // } 
-      // else {
-      //     console.log('Appointment creation failed');
-      //     toast.error('Appointment creation failed');
-      // }
-    } catch (error) {
-      console.error('Error creating appointment:', error);
-      // Handle any network or other errors
-    }
+    console.log(appointmentData);
+    // try {
+    //   const response = await axios.post('http://localhost:4024/api/v1/appointment/create', appointmentData);
+    //   const appointment = response.data;
+    //   toast.success('Appointment created successfully!');
+    //   router.push('/teacher-list');
+    
+    // } catch (error) {
+    //   console.error('Error creating appointment:', error);
+    //   // Handle any network or other errors
+    // }
   };
 
   useEffect(() => {
@@ -81,7 +86,7 @@ const StudentAppointment = () => {
   return (
     <div style={{ marginTop: '4rem' }}>
       <Container>
-        <h1>Teacher Appointment</h1>
+        <h3 className='pt-3' >Teacher Appointment</h3>
         <Form onSubmit={handleSubmit}>
           {/* <div className='d-flex gap-4'>
                         <Form.Group controlId="formName">
