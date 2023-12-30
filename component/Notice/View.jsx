@@ -20,11 +20,11 @@ const View = () => {
         noticeData();
     }, [])
     return (
-        <div style={{ marginTop: '4rem', background: 'var(--bg-color)', }}>
+        <div style={{ marginTop: '4rem', background: 'var(--bg-color)', minHeight: '50rem', maxHeight: 'auto'}}>
             <Container>
                 <Row>
                     {viewNotice?.data?.map((data) => (
-                        <Col lg={4} md={6} key={data?._id} className='py-4'>
+                        <Col lg={4} md={6} key={data?._id} className='py-5'>
                             <Card style={{height: '20rem'}}>
                                 <Card.Body>
                                     <Card.Title>{data?.title}</Card.Title>
