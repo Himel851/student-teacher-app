@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <div>
-      <Navbar bg="light" expand="lg" fixed="top">
+      <Navbar style={{background: '#000'}} expand="lg" fixed="top">
         <Container>
           <Navbar.Brand>
             <Image src="/image/logo.png" alt="logo" width="100" height="50" />
@@ -35,32 +35,32 @@ const Header = () => {
                 <>
                   <Link
                     href="/dashboard"
-                    className="text-dark nav-link arrow-none fw-bold"
+                    className="text-white nav-link arrow-none fw-bold"
                   >
                     Dashboard
                   </Link>
                   <Link
                     href="/teacher-list"
-                    className="text-dark nav-link arrow-none fw-bold"
+                    className="text-white nav-link arrow-none fw-bold"
                   >
                     Teachers List
                   </Link>
-                  {/* <Link href="/student-list" className="text-dark nav-link arrow-none fw-bold">Student's List</Link> */}
+                  {/* <Link href="/student-list" className="text-white nav-link arrow-none fw-bold">Student's List</Link> */}
                   <Link
                     href="/pending-teacher"
-                    className="text-dark nav-link arrow-none fw-bold"
+                    className="text-white nav-link arrow-none fw-bold"
                   >
                     Pending List
                   </Link>
                   <Link
                     href="/approve-teacher"
-                    className="text-dark nav-link arrow-none fw-bold"
+                    className="text-white nav-link arrow-none fw-bold"
                   >
                     Approved List
                   </Link>
                   <Link
                     href="/rejected-teacher"
-                    className="text-dark nav-link arrow-none fw-bold"
+                    className="text-white nav-link arrow-none fw-bold"
                   >
                     Rejected List
                   </Link>
@@ -70,13 +70,13 @@ const Header = () => {
                 <>
                   <Link
                     href="/teacher-list"
-                    className="text-dark nav-link arrow-none fw-bold"
+                    className="text-white nav-link arrow-none fw-bold"
                   >
                     Teacher List
                   </Link>
                   <Link
                     href={`/my-appointment/${auth?._id}`}
-                    className="text-dark nav-link arrow-none fw-bold"
+                    className="text-white nav-link arrow-none fw-bold"
                   >
                     My Appointment
                   </Link>
@@ -86,13 +86,13 @@ const Header = () => {
                 <>
                   <Link
                     href={`/appointment-list/${auth?._id}`}
-                    className="text-dark nav-link arrow-none fw-bold"
+                    className="text-white nav-link arrow-none fw-bold"
                   >
                     Appointment List
                   </Link>
                   <Link
                     href={`/teacher-profile/${auth?._id}`}
-                    className="text-dark nav-link arrow-none fw-bold"
+                    className="text-white nav-link arrow-none fw-bold"
                   >
                     Profile
                   </Link>
@@ -103,19 +103,19 @@ const Header = () => {
               {auth?.role === "student" && (
                 <Link
                   href="/my-profile"
-                  className="text-dark nav-link arrow-none fw-bold mx-3 mt-1"
+                  className="text-white nav-link arrow-none fw-bold mx-3 mt-1"
                 >
                   My Profile
                 </Link>
               )}
               <Link
                 href="/location"
-                className="text-dark nav-link arrow-none fw-bold mx-3 mt-1"
+                className="text-white nav-link arrow-none fw-bold mx-3 mt-1"
               >
                 Map
               </Link>
 
-              <Dropdown className="mx-4" data-bs-theme="dark">
+              <Dropdown className="mx-4" data-bs-theme="white">
                 <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                   Notice
                 </Dropdown.Toggle>

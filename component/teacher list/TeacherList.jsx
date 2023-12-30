@@ -76,7 +76,7 @@ const TeacherList = () => {
                                 <Card.Img
                                     variant="top"
                                     src={teacher?.profileImage || "/image/no-photo.png"}
-                                    style={{ height: "35vh" }}
+                                    style={{ height: "15rem" }}
                                 />
 
                                 <Card.Body>
