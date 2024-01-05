@@ -23,7 +23,7 @@ const View = () => {
         <div style={{ marginTop: '4rem', background: 'var(--bg-color)', minHeight: '50rem', maxHeight: 'auto'}}>
             <Container>
                 <Row>
-                    {viewNotice?.data?.map((data) => (
+                    {viewNotice?.data?.slice()?.reverse()?.map((data) => (
                         <Col lg={4} md={6} key={data?._id} className='py-5'>
                             <Card style={{height: '20rem'}}>
                                 <Card.Body>

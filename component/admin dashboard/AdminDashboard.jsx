@@ -6,18 +6,22 @@ import { FiUsers } from "react-icons/fi";
 import { MdPersonPin } from "react-icons/md";
 import { TbBed } from "react-icons/tb";
 import axios from "axios";
+import Loader from "../loader/Loader";
 
 const Admin = () => {
   const [data, setData] = useState([]);
+  const [loader, setLoader] = useState(false);
   useEffect(() => {
     fetchDoctorList();
   }, []);
 
   const fetchDoctorList = async () => {
+    setLoader(true);
     try {
       const response = await axios.get(
         "http://localhost:4024/api/v1/admin/dashboard"
       );
+      setLoader(false);
       const { data } = response.data;
       setData(data);
       console.log(data);
@@ -25,6 +29,8 @@ const Admin = () => {
       console.error("Error fetching doctor list:", error);
     }
   };
+
+  if(loader) return <Loader />
 
   return (
     <div style={{ marginTop: "", padding: "30px", background: 'var(--bg-color2)', height: '100vh' }}>

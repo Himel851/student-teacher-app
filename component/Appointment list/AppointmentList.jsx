@@ -17,7 +17,6 @@ export default function AppointmentList() {
       axios.get(`http://localhost:4024/api/v1/appointment/view/teacher/${id}`)
         .then(response => {
           setList(response.data?.data);
-          console.log(response.data?.data);
         })
         .catch(error => {
           console.error('Error fetching doctor details:', error);
@@ -30,7 +29,6 @@ export default function AppointmentList() {
       const response = await axios.get(`http://localhost:4024/api/v1/appointment/approve/${teacherId}`);
       toast.success('Appointment approve successful......');
     } catch (error) {
-      console.error('Error approving doctor:', error);
       toast.error('Appointment approve failed......');
     }
   };
@@ -40,7 +38,6 @@ export default function AppointmentList() {
       const response = await axios.get(`http://localhost:4024/api/v1/appointment/reject/${teacherId}`);
       toast.success('Appointment Rejected successful......');
     } catch (error) {
-      console.error('Error rejecting doctor:', error);
       toast.error('Appointment rejected failed......');
     }
   };
@@ -70,7 +67,7 @@ export default function AppointmentList() {
             {list?.map((data, index) => (
               <tr key={data._id}>
                 <td>{index + 1}</td>
-                <td>{data?.slot}</td>
+                <td>{new Date(parseInt(data?.slot, 10)).toLocaleString()}</td>
                 <td>{data?.reason}</td>
 
                 <td>

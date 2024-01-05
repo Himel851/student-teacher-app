@@ -4,12 +4,15 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { Button, Card, Col, Container, Dropdown, Row, Table } from 'react-bootstrap'
 import { useAuth } from '../../context/auth';
+import Loader from '../loader/Loader';
+import Image from 'next/image';
 
 const TeacherList = () => {
     const [auth, setAuth] = useAuth();
     const [departments, setDepartments] = useState([]);
     const [selectedDepartment, setSelectedDepartment] = useState('Computer Science & Engineering');
     const [teachers, setTeachers] = useState([]);
+    const [loader, setLoader] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -26,11 +29,12 @@ const TeacherList = () => {
 
     useEffect(() => {
         if (selectedDepartment) {
+            setLoader(true);
             // Fetch the doctors based on the selected department
             axios.get(`http://localhost:4024/api/v1/teacher/view/teacher/${selectedDepartment}`)
                 .then(response => {
+                    setLoader(false);
                     setTeachers(response.data.data);
-                    console.log(response.data.data)
                 })
                 .catch(error => {
                     console.error('Error fetching teachers:', error);
@@ -42,11 +46,12 @@ const TeacherList = () => {
     const handleDepartmentSelection = (department) => {
         setSelectedDepartment(department);
         // Do something with the selected department (e.g., send it to the server, update state, etc.)
-        console.log('Selected department:', department);
     };
     const handleProfileClick = (teacherId) => {
         router.push(`/teacher-profile/${teacherId}`);
     };
+
+    if (loader) return <Loader />
 
     return (
         <div style={{ marginTop: '4rem', background: 'var(--bg-color)' }} className='pb-5'>
@@ -68,7 +73,9 @@ const TeacherList = () => {
                 </Dropdown>
             </div>
 
-            <Container>
+            {loader ? <div className='d-flex justify-content-center'>
+                <Image src='/image/loader.gif' alt='loader' width={300} height={300} />
+            </div> : <Container>
                 <Row className='pb-5'>
                     {teachers.length > 0 ? <> {teachers.map(teacher => (
                         <Col xl={3} md={4} sm={12} className='mt-3' key={teacher._id}>
@@ -105,7 +112,7 @@ const TeacherList = () => {
                         </>}
                 </Row>
 
-            </Container>
+            </Container>}
         </div>
     )
 }
