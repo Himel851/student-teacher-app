@@ -12,10 +12,10 @@ const Admin = () => {
   const [data, setData] = useState([]);
   const [loader, setLoader] = useState(false);
   useEffect(() => {
-    fetchDoctorList();
+    fetchData();
   }, []);
 
-  const fetchDoctorList = async () => {
+  const fetchData = async () => {
     try {
       const response = await axios.get(
         "http://localhost:4024/api/v1/admin/dashboard"
