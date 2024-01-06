@@ -89,8 +89,8 @@ const TeacherList = () => {
                                 <Card.Body>
                                     <Card.Title>{teacher.name}</Card.Title>
                                     <Card.Text>
-                                        <b>Education -</b> {teacher?.education} <br />
-                                        <b>Experience-</b> {teacher?.experience}
+                                        <b>Designation -</b> {teacher?.education} <br />
+                                        {/* <b>Experience-</b> {teacher?.experience} */}
                                     </Card.Text>
                                     <div className='d-flex gap-3'>
                                         {auth?.role === 'student' && <>

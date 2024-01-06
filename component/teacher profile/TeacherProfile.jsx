@@ -62,7 +62,7 @@ const TeacherProfile = () => {
             <p><b>Gender -</b> {teacher?.gender} </p>
             <p><b>Age -</b> {teacher?.age} </p>
             <p><b>Department -</b> {teacher?.department}</p>
-            <p> <b>Education -</b> {teacher?.education}</p>
+            <p> <b>Designation -</b> {teacher?.education}</p>
             <p> <b>Experience  -</b> {teacher?.experience} </p>
             <div className='d-block d-md-none'>
               {auth?.role === 'teacher' && <div className='d-flex justify-content-center'>

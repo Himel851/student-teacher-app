@@ -145,7 +145,7 @@ const EditProfile = () => {
                     <Row className="d-flex justify-content-center ">
                         <Col md={6}>
                             <Form.Group controlId="education" className='d-flex gap-3 mt-3'>
-                                <Form.Label>Education</Form.Label>
+                                <Form.Label>Designation</Form.Label>
                                 <Form.Control
                                     type="text"
                                     name="education"
