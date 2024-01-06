@@ -25,7 +25,7 @@ const StudentProfile = () => {
   }, [auth?._id]);
 
   return (
-    <div  style={{ paddingTop: '4rem', paddingBottom: '4rem', background: 'var(--bg-color)',  height: '100vh' }}>
+    <div  style={{ paddingTop: '4rem', paddingBottom: '4rem', background: '#fff',  height: '100vh' }}>
       <Container className="p-3 profileHeight rounded mt-5" style={{background: 'var(--bg-white)', height: '70vh'}}>
         <Row className='mt-5'>
           <Col md={4}>

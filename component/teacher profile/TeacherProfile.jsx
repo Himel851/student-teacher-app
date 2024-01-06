@@ -6,27 +6,31 @@ import { toast } from 'react-toastify';
 import { useAuth } from '../../context/auth';
 import Link from 'next/link';
 import axios from 'axios';
+import Loader from '../loader/Loader';
 
 const TeacherProfile = () => {
   const [auth, setAuth] = useAuth();
   const router = useRouter();
   const { id } = router?.query;
   const [teacher, setTeacher] = useState({});
-  console.log(id);
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     if (id) {
+      setLoader(true);
       // Fetch the doctor's details based on the doctorId
       axios.get(`http://localhost:4024/api/v1/teacher/view-profile/${id}`)
         .then(response => {
+          setLoader(false);
           setTeacher(response.data?.data);
-          console.log(response.data?.data);
         })
         .catch(error => {
           console.error('Error fetching doctor details:', error);
         });
     }
   }, [id]);
+
+  if (loader) return <Loader />
 
 
   return (

@@ -3,22 +3,24 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/auth";
 import { useRouter } from "next/router";
 import { Button, Container, Table } from "react-bootstrap";
+import Loader from "../loader/Loader";
 
 const MyAppointment = () => {
   const [auth, setAuth] = useAuth();
   const [list, setList] = useState([]);
+  const [loader, setLoader] = useState(false);
   const router = useRouter();
 
-  console.log(auth?._id);
 
   useEffect(() => {
     const fetchInvoiceData = async () => {
       try {
+        setLoader(true);
         const response = await axios.get(
           `http://localhost:4024/api/v1/appointment/view/student/${auth?._id}`
         );
+        setLoader(false);
         setList(response?.data);
-        console.log(response?.data);
       } catch (error) {
         // toast.error("Something went wrong");
       }
@@ -26,6 +28,8 @@ const MyAppointment = () => {
 
     fetchInvoiceData();
   }, [router.query.id]);
+
+  if (loader) return <Loader />;
 
   return (
     <div style={{ marginTop: "4rem", padding: "30px", background: 'var(--bg-color)', height: '100vh' }}>
